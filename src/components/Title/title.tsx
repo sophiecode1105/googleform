@@ -2,6 +2,10 @@ import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { FormData } from '../../model/typeDefs';
 import { useEffect } from 'react';
+import { useAppDispatch } from '../../state/hook';
+import { updateHedaerData } from '../../state/survey';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../state/store';
 
 const Container = styled.div`
   margin: 10px auto 0 auto;
@@ -40,15 +44,20 @@ const TitleInput = styled(Input)`
 `;
 
 const Title = () => {
+  const dispatch = useAppDispatch();
+  const contentValue = useSelector((state: RootState) => state.surveyData.header);
+
   useEffect(() => {
-    setValue('title', '제목없는 설문지');
-  });
-  const { register, getValues, setValue, handleSubmit } = useForm<FormData>({ mode: 'onChange' });
-  const onSubmit = () => {};
+    setValue('title', contentValue.title);
+  }, []);
+
+  const { register, watch, setValue } = useForm<FormData>({ mode: 'onChange' });
+
+  dispatch(updateHedaerData({ title: watch().title, explain: watch().explain }));
 
   return (
     <Container>
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form>
         <InputWrap>
           <TitleInput type="text" placeholder="설문지 제목" {...register('title')} />
           <Input type="text" placeholder="설문지 설명" {...register('explain')} />
