@@ -1,4 +1,6 @@
+import Title from '../components/Title/title';
+
 const Main = () => {
-  return <div>메인입니다</div>;
+  return <Title />;
 };
 export default Main;
