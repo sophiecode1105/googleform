@@ -10,7 +10,7 @@ const initialState: surveyState = {
 };
 
 export const surveyDataSlice = createSlice({
-  name: 'focused',
+  name: 'survey',
   initialState,
   reducers: {
     updateHedaerData: (state, action: PayloadAction<{ title: string; explain: string }>) => {
