@@ -8,5 +8,14 @@ export interface surveyState {
     title: string;
     explain: string;
   };
+  question: {
+    title: string;
+    optionType: string;
+    optionList: string[];
+  };
   value: string;
+}
+
+export interface visibleProp {
+  visible: boolean;
 }
