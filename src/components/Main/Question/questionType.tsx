@@ -17,8 +17,8 @@ const QuestionType = ({ questionType, qIdx }: { questionType: type; qIdx: number
   const [visible, setVisible] = useState<boolean>(false);
 
   const lists = [
-    { sort: 'text', typeTitle: '단답형', img: short },
-    { sort: 'text', typeTitle: '장문형', img: long },
+    { sort: 'short-text', typeTitle: '단답형', img: short },
+    { sort: 'long-text', typeTitle: '장문형', img: long },
     { sort: 'radio', typeTitle: '객관식 질문', img: radio },
     { sort: 'checkbox', typeTitle: '체크박스', img: check },
     { sort: 'drop', typeTitle: '드롭다운', img: drop },

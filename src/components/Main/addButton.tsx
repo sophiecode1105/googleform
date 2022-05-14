@@ -11,7 +11,7 @@ const AddButton = () => {
       title: '',
       optionType: {
         typeTitle: '단답형',
-        sort: 'short',
+        sort: 'short-text',
         img: short,
       },
       necessary: false,

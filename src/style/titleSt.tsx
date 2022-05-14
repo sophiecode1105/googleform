@@ -53,7 +53,7 @@ export const TitleInput = styled(Input)`
 `;
 
 export const Alert = styled.div`
-  color: red;
+  color: rgb(205, 27, 29);
   font-size: 15px;
   margin: 10px 10px 5px 10px;
 `;

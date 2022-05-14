@@ -25,9 +25,11 @@ export const QuesWrap = styled.div`
 
 export const QuesTitle = styled.div`
   margin: 20px;
-  border: 1px solid red;
   width: auto;
   font-size: 18px;
+  > span {
+    color: rgb(205, 27, 29);
+  }
 `;
 
 export const QuesTitleInput = styled.input`
@@ -177,8 +179,23 @@ export const TextDiv = styled.div`
   }
 `;
 
+interface sizeProp {
+  short: boolean;
+}
+
+export const AnswerInput = styled.input<sizeProp>`
+  all: unset;
+  width: ${(props) => (props.short ? '40%' : '100%')};
+  font-size: 14px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgb(217, 217, 217);
+  &:focus {
+    border-bottom: 1.5px solid rgb(18, 9, 99);
+    transition: 0.7s;
+  }
+`;
+
 export const SelectListWrap = styled.div`
-  border: 1px solid red;
   display: flex;
   flex-direction: column;
   margin: 20px;
@@ -188,11 +205,11 @@ export const SelectLabel = styled.label`
   margin-left: 10px;
 `;
 
-export const SelectInput = styled.input`
+export const CheckInput = styled.input`
   appearance: none;
   width: 1.2rem;
   height: 1.2rem;
-  border: 2px solid rgb(77, 80, 84);
+  border: 1px solid rgb(77, 80, 84);
   border-radius: 0.15rem;
   margin: 10px 0px;
   &:checked {
@@ -203,6 +220,14 @@ export const SelectInput = styled.input`
     background-repeat: no-repeat;
     background-color: rgb(18, 9, 99);
   }
+`;
+
+export const RadioInput = styled.input`
+  accent-color: rgb(18, 9, 99);
+  width: 18px;
+  height: 18px;
+  margin: 10px 0px;
+  border: 2px solid black;
 `;
 
 export const SelectWrap = styled.div`

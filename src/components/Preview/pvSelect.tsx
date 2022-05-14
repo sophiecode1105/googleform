@@ -1,11 +1,25 @@
 import { option } from '../../model/typeDefs';
 import { useForm } from 'react-hook-form';
-import { SelectInput, SelectLabel, SelectWrap } from '../../style/questionSt';
+import { CheckInput, RadioInput, SelectLabel, SelectWrap } from '../../style/questionSt';
 
-const PvSelect = ({ necessary, sort, option }: { necessary: boolean; sort: string; option: option }) => {
+const PvSelect = ({
+  title,
+  necessary,
+  sort,
+  option,
+  qIdx,
+}: {
+  title: string;
+  necessary: boolean;
+  sort: string;
+  option: option;
+  qIdx: number;
+}) => {
+  let name = title + qIdx;
   return (
     <SelectWrap>
-      <SelectInput type={sort} />
+      {sort === 'checkbox' ? <CheckInput type={sort} /> : null}
+      {sort === 'radio' ? <RadioInput name={name} type={sort} /> : null}
       <SelectLabel>{option.content}</SelectLabel>
     </SelectWrap>
   );

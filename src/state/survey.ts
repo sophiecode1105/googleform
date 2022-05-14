@@ -12,7 +12,7 @@ const initialState: surveyState = {
       title: '',
       optionType: {
         typeTitle: '단답형',
-        sort: 'text',
+        sort: 'short-text',
         img: short,
       },
       necessary: false,
