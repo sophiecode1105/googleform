@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { idText } from 'typescript';
 import Question from '../components/Question/question';
-import { surveyState, option } from '../model/typeDefs';
+import { surveyState, option, question } from '../model/typeDefs';
 
 const initialState: surveyState = {
   header: {
@@ -45,11 +45,15 @@ export const surveyDataSlice = createSlice({
     },
     updateOptionList: (state, action: PayloadAction<{ qIdx: number; list: option[] }>) => {
       const { qIdx, list } = action.payload;
-      state.questions[qIdx].optionList = action.payload.list;
+      state.questions[qIdx].optionList = list;
     },
     removeItemFromOptionList: (state, action: PayloadAction<{ qIdx: number; itemIdx: number }>) => {
       const { qIdx, itemIdx } = action.payload;
       state.questions[qIdx].optionList = state.questions[qIdx].optionList.filter((_, i) => i !== itemIdx);
+    },
+    addQuestionList: (state, action: PayloadAction<{ list: question[] }>) => {
+      const { list } = action.payload;
+      state.questions = list;
     },
   },
 });
@@ -61,5 +65,6 @@ export const {
   changeOptionTitle,
   updateOptionList,
   removeItemFromOptionList,
+  addQuestionList,
 } = surveyDataSlice.actions;
 export default surveyDataSlice.reducer;
