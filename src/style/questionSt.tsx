@@ -11,6 +11,11 @@ export const Container = styled.div`
   padding: 10px;
 `;
 
+export const PvQuesWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const QuesWrap = styled.div`
   display: flex;
   align-items: center;
@@ -18,7 +23,14 @@ export const QuesWrap = styled.div`
   width: 100%;
 `;
 
-export const QuesTitle = styled.input`
+export const QuesTitle = styled.div`
+  margin: 20px;
+  border: 1px solid red;
+  width: auto;
+  font-size: 18px;
+`;
+
+export const QuesTitleInput = styled.input`
   all: unset;
   width: 50%;
   margin: 20px;
@@ -163,4 +175,37 @@ export const TextDiv = styled.div`
       background-color: rgb(246, 249, 254);
     }
   }
+`;
+
+export const SelectListWrap = styled.div`
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+`;
+
+export const SelectLabel = styled.label`
+  margin-left: 10px;
+`;
+
+export const SelectInput = styled.input`
+  appearance: none;
+  width: 1.2rem;
+  height: 1.2rem;
+  border: 2px solid rgb(77, 80, 84);
+  border-radius: 0.15rem;
+  margin: 10px 0px;
+  &:checked {
+    border-color: transparent;
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/White_check.svg/1200px-White_check.svg.png');
+    background-size: 100% 100%;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-color: rgb(18, 9, 99);
+  }
+`;
+
+export const SelectWrap = styled.div`
+  display: flex;
+  align-items: center;
 `;

@@ -1,8 +1,3 @@
-export type FormData = {
-  title: string;
-  explain: string;
-};
-
 export interface surveyState {
   header: {
     title: string;
@@ -32,4 +27,9 @@ export interface type {
   typeTitle: string;
   sort: string;
   img: string;
+}
+
+export interface title {
+  title: string;
+  explain: string;
 }

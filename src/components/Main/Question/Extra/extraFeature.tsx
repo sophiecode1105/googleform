@@ -1,9 +1,9 @@
-import { useAppDispatch } from '../../../state/hook';
-import { addQuestionList, removeQuestionFromQuestions } from '../../../state/survey';
-import { ExtraContainer, ExtraIcon, ExtraIconWrap, Line, Text } from '../../../style/extraSt';
+import { useAppDispatch } from '../../../../state/hook';
+import { addQuestionList, removeQuestionFromQuestions } from '../../../../state/survey';
+import { ExtraContainer, ExtraIcon, ExtraIconWrap, Line, Text } from '../../../../style/extraSt';
 import lodash from 'lodash';
 import Toggle from './toggle';
-import { question } from '../../../model/typeDefs';
+import { question } from '../../../../model/typeDefs';
 
 const ExtraFeature = ({ question, qIdx }: { question: question; qIdx: number }) => {
   const dispatch = useAppDispatch();

@@ -1,7 +1,7 @@
-import { useAppDispatch } from '../../../state/hook';
+import { useAppDispatch } from '../../../../state/hook';
 import Option from './option';
-import { updateOptionList } from '../../../state/survey';
-import { option } from '../../../model/typeDefs';
+import { updateOptionList } from '../../../../state/survey';
+import { option } from '../../../../model/typeDefs';
 import {
   AddOptionInput,
   AddWrap,
@@ -12,7 +12,7 @@ import {
   OptionNum,
   OptionWrap,
   TextDiv,
-} from '../../../style/questionSt';
+} from '../../../../style/questionSt';
 import { useEffect } from 'react';
 
 const Answer = ({ optionType, optionList, qIdx }: { optionType: string; optionList: option[]; qIdx: number }) => {

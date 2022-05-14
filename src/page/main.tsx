@@ -1,8 +1,9 @@
-import Question from '../components/Question/question';
-import Title from '../components/Title/title';
+import Question from '../components/Main/Question/question';
+import Title from '../components/Main/Title/title';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { RootState } from '../state/store';
+import AddButton from '../components/Main/addButton';
 
 const Container = styled.div`
   max-width: 800px;
@@ -20,6 +21,7 @@ const Main = () => {
       {questionList.map((question, idx) => {
         return <Question question={question} idx={idx} key={`q-${idx}`} />;
       })}
+      <AddButton />
     </Container>
   );
 };

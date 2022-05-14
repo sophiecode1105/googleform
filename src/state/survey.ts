@@ -1,6 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { idText } from 'typescript';
-import Question from '../components/Question/question';
 import short from '../assets/short.png';
 import { surveyState, option, question, type } from '../model/typeDefs';
 
@@ -14,7 +12,7 @@ const initialState: surveyState = {
       title: '',
       optionType: {
         typeTitle: '단답형',
-        sort: 'short',
+        sort: 'text',
         img: short,
       },
       necessary: false,

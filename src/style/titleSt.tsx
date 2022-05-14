@@ -17,6 +17,13 @@ export const InputWrap = styled.div`
   display: flex;
   flex-direction: column;
 `;
+interface necessaryProp {
+  necessary: boolean;
+}
+
+export const TitleWrap = styled(InputWrap)<necessaryProp>`
+  border-bottom: ${(props) => (props.necessary ? '1px solid rgb(209,212,217)' : 'none')};
+`;
 
 export const Input = styled.input`
   all: unset;
@@ -30,7 +37,23 @@ export const Input = styled.input`
   }
 `;
 
+export const TitleContent = styled.div`
+  font-size: 32px;
+  margin: 20px;
+`;
+
+export const SubTitleContent = styled.div`
+  font-size: 15px;
+  margin: 0px 20px 20px 20px;
+`;
+
 export const TitleInput = styled(Input)`
   font-size: 32px;
   margin-top: 20px;
+`;
+
+export const Alert = styled.div`
+  color: red;
+  font-size: 15px;
+  margin: 10px 10px 5px 10px;
 `;

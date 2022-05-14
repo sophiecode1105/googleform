@@ -1,14 +1,14 @@
-import short from '../../assets/short.png';
-import long from '../../assets/long.png';
-import check from '../../assets/checkbox.png';
-import radio from '../../assets/radiobox.png';
-import drop from '../../assets/dropbox.png';
-import down from '../../assets/down.png';
-import { useAppDispatch } from '../../state/hook';
+import short from '../../../assets/short.png';
+import long from '../../../assets/long.png';
+import check from '../../../assets/checkbox.png';
+import radio from '../../../assets/radiobox.png';
+import drop from '../../../assets/dropbox.png';
+import down from '../../../assets/down.png';
+import { useAppDispatch } from '../../../state/hook';
 import { useState, useRef, useEffect } from 'react';
-import { Icon, IconWrap, ListWrap, Selection, Title, Wrap } from '../../style/questionSt';
-import { changeOptionType } from '../../state/survey';
-import { type } from '../../model/typeDefs';
+import { Icon, IconWrap, ListWrap, Selection, Title, Wrap } from '../../../style/questionSt';
+import { changeOptionType } from '../../../state/survey';
+import { type } from '../../../model/typeDefs';
 
 const QuestionType = ({ questionType, qIdx }: { questionType: type; qIdx: number }) => {
   const dispatch = useAppDispatch();
@@ -17,10 +17,10 @@ const QuestionType = ({ questionType, qIdx }: { questionType: type; qIdx: number
   const [visible, setVisible] = useState<boolean>(false);
 
   const lists = [
-    { sort: 'short', typeTitle: '단답형', img: short },
-    { sort: 'long', typeTitle: '장문형', img: long },
+    { sort: 'text', typeTitle: '단답형', img: short },
+    { sort: 'text', typeTitle: '장문형', img: long },
     { sort: 'radio', typeTitle: '객관식 질문', img: radio },
-    { sort: 'check', typeTitle: '체크박스', img: check },
+    { sort: 'checkbox', typeTitle: '체크박스', img: check },
     { sort: 'drop', typeTitle: '드롭다운', img: drop },
   ];
 

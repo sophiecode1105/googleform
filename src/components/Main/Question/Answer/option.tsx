@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useAppDispatch } from '../../../state/hook';
-import { changeOptionTitle, removeItemFromOptionList } from '../../../state/survey';
-import { OptionIcon, OptionInput, OptionNum, OptionWrap } from '../../../style/questionSt';
+import { useAppDispatch } from '../../../../state/hook';
+import { changeOptionTitle, removeItemFromOptionList } from '../../../../state/survey';
+import { OptionIcon, OptionInput, OptionNum, OptionWrap } from '../../../../style/questionSt';
 
 const Option = ({
   optionType,

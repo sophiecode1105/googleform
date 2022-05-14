@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useAppDispatch } from '../../state/hook';
-import { updateHedaerData } from '../../state/survey';
+import { useAppDispatch } from '../../../state/hook';
+import { updateHedaerData } from '../../../state/survey';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../state/store';
-import { Container, Form, Input, InputWrap, TitleInput } from '../../style/titleSt';
+import { RootState } from '../../../state/store';
+import { Container, Form, Input, InputWrap, TitleInput } from '../../../style/titleSt';
 
 const Title = () => {
   const dispatch = useAppDispatch();
