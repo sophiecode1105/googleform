@@ -1,18 +1,20 @@
-import { useSelector } from 'react-redux';
-import { RootState } from '../state/store';
 import { useAppDispatch } from '../state/hook';
 import { addQuestionList } from '../state/survey';
 import { Button, Container } from '../style/button';
+import short from '../assets/short.png';
 
 const AddButton = () => {
   const dispatch = useAppDispatch();
-  const questions = useSelector((state: RootState) => state.surveyData.questions);
-  console.log(questions);
 
   const addQuestion = () => {
     let newQuestion = {
       title: '',
-      optionType: '단답형',
+      optionType: {
+        typeTitle: '단답형',
+        sort: 'short',
+        img: short,
+      },
+      necessary: false,
       optionList: [
         {
           content: '옵션 1',
@@ -20,8 +22,8 @@ const AddButton = () => {
         },
       ],
     };
-    let newList = [...questions, newQuestion];
-    dispatch(addQuestionList({ list: newList }));
+
+    dispatch(addQuestionList({ newQuestion }));
   };
 
   return (

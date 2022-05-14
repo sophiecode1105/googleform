@@ -8,20 +8,20 @@ import { useAppDispatch } from '../../state/hook';
 import { useState, useRef, useEffect } from 'react';
 import { Icon, IconWrap, ListWrap, Selection, Title, Wrap } from '../../style/questionSt';
 import { changeOptionType } from '../../state/survey';
+import { type } from '../../model/typeDefs';
 
-const QuestionType = ({ qIdx }: { qIdx: number }) => {
+const QuestionType = ({ questionType, qIdx }: { questionType: type; qIdx: number }) => {
   const dispatch = useAppDispatch();
   const side = useRef<HTMLDivElement>(null);
 
-  const [choice, setChoice] = useState<{ img: string; title: string }>({ img: short, title: '단답형' });
   const [visible, setVisible] = useState<boolean>(false);
 
   const lists = [
-    { img: short, title: '단답형' },
-    { img: long, title: '장문형' },
-    { img: radio, title: '객관식 질문' },
-    { img: check, title: '체크박스' },
-    { img: drop, title: '드롭다운' },
+    { sort: 'short', typeTitle: '단답형', img: short },
+    { sort: 'long', typeTitle: '장문형', img: long },
+    { sort: 'radio', typeTitle: '객관식 질문', img: radio },
+    { sort: 'check', typeTitle: '체크박스', img: check },
+    { sort: 'drop', typeTitle: '드롭다운', img: drop },
   ];
 
   //<Selection />이 아닌 부분을 선택 했을시에는 list(단답형 장문형 등등)들이 보이지 않게 하는 함수
@@ -47,23 +47,23 @@ const QuestionType = ({ qIdx }: { qIdx: number }) => {
       }}
     >
       <IconWrap>
-        <Icon src={choice.img} />
-        <Title>{choice.title}</Title>
+        <Icon src={questionType.img} />
+        <Title>{questionType.typeTitle}</Title>
       </IconWrap>
       <Icon src={down} />
       <ListWrap visible={visible}>
         {visible
           ? lists.map((list, i) => {
+              console.log(list);
               return (
                 <Wrap
                   key={i}
                   onClick={() => {
-                    setChoice(list);
-                    dispatch(changeOptionType({ qIdx, option: list.title }));
+                    dispatch(changeOptionType({ qIdx, option: list }));
                   }}
                 >
                   <Icon src={list.img} />
-                  <Title>{list.title}</Title>
+                  <Title>{list.typeTitle}</Title>
                 </Wrap>
               );
             })

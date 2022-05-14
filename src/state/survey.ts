@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { idText } from 'typescript';
 import Question from '../components/Question/question';
-import { surveyState, option, question } from '../model/typeDefs';
+import short from '../assets/short.png';
+import { surveyState, option, question, type } from '../model/typeDefs';
 
 const initialState: surveyState = {
   header: {
@@ -11,7 +12,12 @@ const initialState: surveyState = {
   questions: [
     {
       title: '',
-      optionType: '단답형',
+      optionType: {
+        typeTitle: '단답형',
+        sort: 'short',
+        img: short,
+      },
+      necessary: false,
       optionList: [
         {
           content: '옵션 1',
@@ -35,9 +41,17 @@ export const surveyDataSlice = createSlice({
     updateFocused: (state, action: PayloadAction<{ title: string }>) => {
       state.value = action.payload.title;
     },
-    changeOptionType: (state, action: PayloadAction<{ qIdx: number; option: string }>) => {
+    changeQuestionTitle: (state, action: PayloadAction<{ qIdx: number; title: string }>) => {
+      const { qIdx, title } = action.payload;
+      state.questions[qIdx].title = title;
+    },
+    changeOptionType: (state, action: PayloadAction<{ qIdx: number; option: type }>) => {
       const { qIdx, option } = action.payload;
       state.questions[qIdx].optionType = option;
+    },
+    changeNeccessaryState: (state, action: PayloadAction<{ qIdx: number; isOn: boolean }>) => {
+      const { qIdx, isOn } = action.payload;
+      state.questions[qIdx].necessary = isOn;
     },
     changeOptionTitle: (state, action: PayloadAction<{ qIdx: number; idx: number; content: string }>) => {
       const { qIdx, idx, content } = action.payload;
@@ -51,9 +65,15 @@ export const surveyDataSlice = createSlice({
       const { qIdx, itemIdx } = action.payload;
       state.questions[qIdx].optionList = state.questions[qIdx].optionList.filter((_, i) => i !== itemIdx);
     },
-    addQuestionList: (state, action: PayloadAction<{ list: question[] }>) => {
-      const { list } = action.payload;
-      state.questions = list;
+    addQuestionList: (state, action: PayloadAction<{ newQuestion: question }>) => {
+      const { newQuestion } = action.payload;
+      console.log('잘들어가는지', newQuestion);
+      let newList = [...state.questions, newQuestion];
+      state.questions = newList;
+    },
+    removeQuestionFromQuestions: (state, action: PayloadAction<{ qIdx: number }>) => {
+      const { qIdx } = action.payload;
+      state.questions = state.questions.filter((_, i) => i !== qIdx);
     },
   },
 });
@@ -61,10 +81,13 @@ export const surveyDataSlice = createSlice({
 export const {
   updateHedaerData,
   updateFocused,
+  changeQuestionTitle,
   changeOptionType,
+  changeNeccessaryState,
   changeOptionTitle,
   updateOptionList,
   removeItemFromOptionList,
   addQuestionList,
+  removeQuestionFromQuestions,
 } = surveyDataSlice.actions;
 export default surveyDataSlice.reducer;

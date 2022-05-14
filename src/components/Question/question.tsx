@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useAppDispatch } from '../../state/hook';
 import { question } from '../../model/typeDefs';
 import { Container, QuesTitle, QuesWrap } from '../../style/questionSt';
 import Answer from './Answer/answer';
 import ExtraFeature from './Extra/extraFeature';
 import QuestionType from './questionType';
+import { changeQuestionTitle } from '../../state/survey';
 
 const Question = ({ question, idx }: { question: question; idx: number }) => {
-  const [Ques, setQues] = useState<string>('');
+  const dispatch = useAppDispatch();
 
   return (
     <Container>
@@ -14,14 +15,15 @@ const Question = ({ question, idx }: { question: question; idx: number }) => {
         <QuesTitle
           type="text"
           placeholder="질문"
+          value={question.title}
           onChange={(event) => {
-            setQues(event.target.value);
+            dispatch(changeQuestionTitle({ qIdx: idx, title: event.target.value }));
           }}
         />
-        <QuestionType qIdx={idx} />
+        <QuestionType questionType={question.optionType} qIdx={idx} />
       </QuesWrap>
-      <Answer optionType={question.optionType} optionList={question.optionList} qIdx={idx} />
-      <ExtraFeature />
+      <Answer optionType={question.optionType.typeTitle} optionList={question.optionList} qIdx={idx} />
+      <ExtraFeature question={question} qIdx={idx} />
     </Container>
   );
 };

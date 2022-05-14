@@ -23,6 +23,13 @@ export interface option {
 
 export interface question {
   title: string;
-  optionType: string;
+  necessary: boolean;
+  optionType: type;
   optionList: option[];
+}
+
+export interface type {
+  typeTitle: string;
+  sort: string;
+  img: string;
 }
