@@ -100,7 +100,6 @@ export const OptionListWrap = styled.div`
 export const OptionWrap = styled.div`
   display: flex;
   align-items: center;
-  border: 1px solid red;
   padding: 20px 20px 10px 20px;
 `;
 
@@ -108,6 +107,7 @@ export const OptionIcon = styled.div`
   font-size: 20px;
   margin-right: 10px;
   color: rgb(175, 175, 175);
+
   &:last-child {
     color: black;
     cursor: pointer;
@@ -116,7 +116,8 @@ export const OptionIcon = styled.div`
 
 export const InputProp = styled.input`
   all: unset;
-
+  font-size: 14px;
+  padding-bottom: 5px;
   &:hover {
     border-bottom: 1px solid rgb(236, 236, 236);
   }
@@ -127,9 +128,31 @@ export const InputProp = styled.input`
 `;
 
 export const AddOptionInput = styled(InputProp)`
-  width: auto;
+  width: 4rem;
 `;
 
 export const OptionInput = styled(InputProp)`
   width: 70%;
+`;
+
+export const OptionNum = styled.div`
+  margin-right: 10px;
+`;
+
+export const AddWrap = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const TextDiv = styled.div`
+  padding-bottom: 5px;
+  font-size: 14px;
+  margin: 0 4px;
+  &:last-child {
+    color: rgb(84, 135, 235);
+    cursor: pointer;
+    &:hover {
+      background-color: rgb(246, 249, 254);
+    }
+  }
 `;

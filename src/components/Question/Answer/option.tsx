@@ -3,14 +3,34 @@ import { useAppDispatch } from '../../../state/hook';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../state/store';
 import { changeOptionTitle, updateOptionList } from '../../../state/survey';
-import { OptionIcon, OptionInput, OptionWrap } from '../../../style/questionSt';
+import { OptionIcon, OptionInput, OptionNum, OptionWrap } from '../../../style/questionSt';
+import { setConstantValue } from 'typescript';
 
-const Option = ({ idx }: { idx: number }) => {
+const Option = ({
+  optionTitle,
+  iconClassName,
+  item,
+  idx,
+}: {
+  optionTitle: string;
+  iconClassName: string;
+  item: { content: string; order: number };
+  idx: number;
+}) => {
   const dispatch = useAppDispatch();
   const optionList = useSelector((state: RootState) => state.surveyData.question.optionList);
-  console.log('옵션리슽', optionList);
 
-  const defaultText = '옵션' + String(idx + 1);
+  let defaultText = '';
+
+  useEffect(() => {
+    if (item.content === '기타...') {
+      setText('기타...');
+    } else {
+      defaultText = '옵션 ' + item.order;
+      setText(defaultText);
+    }
+  }, [item.order]);
+
   const [text, setText] = useState<string>(defaultText);
   const [writing, setWriting] = useState<boolean>(false);
 
@@ -19,15 +39,20 @@ const Option = ({ idx }: { idx: number }) => {
   }, [text]);
 
   const deleteList = (idxToRemove: number) => {
-    dispatch(updateOptionList({ list: optionList.filter((item) => idxToRemove !== optionList.indexOf(item)) }));
+    let newList = optionList.filter((el, idx) => idx !== idxToRemove);
+    dispatch(
+      updateOptionList({
+        list: newList,
+      })
+    );
   };
 
   return (
     <OptionWrap>
-      <OptionIcon className="fa-regular fa-circle" />
+      {optionTitle === '드롭다운' ? <OptionNum>{idx + 1}</OptionNum> : <OptionIcon className={iconClassName} />}
       <OptionInput
         type="text"
-        value={writing === false && !text ? defaultText : text}
+        value={writing === false && !text ? item.content : text}
         onChange={(event) => {
           setText(event.target.value);
         }}
@@ -41,7 +66,22 @@ const Option = ({ idx }: { idx: number }) => {
           }
         }}
       />
-      <OptionIcon onClick={() => deleteList(idx)} className="fa-solid fa-xmark" />
+      {item.order === -1 && optionList.length === 2 ? (
+        <OptionIcon
+          onClick={() => {
+            deleteList(idx);
+          }}
+          className="fa-solid fa-xmark"
+        />
+      ) : null}
+      {optionList.length !== 1 && optionList.length !== 2 ? (
+        <OptionIcon
+          onClick={() => {
+            deleteList(idx);
+          }}
+          className="fa-solid fa-xmark"
+        />
+      ) : null}
     </OptionWrap>
   );
 };

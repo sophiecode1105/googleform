@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { surveyState } from '../model/typeDefs';
+import { surveyState, option } from '../model/typeDefs';
 
 const initialState: surveyState = {
   header: {
@@ -9,7 +9,12 @@ const initialState: surveyState = {
   question: {
     title: '',
     optionType: '단답형',
-    optionList: ['옵션1'],
+    optionList: [
+      {
+        content: '옵션 1',
+        order: 1,
+      },
+    ],
   },
   value: 'title',
 };
@@ -29,9 +34,12 @@ export const surveyDataSlice = createSlice({
       state.question.optionType = action.payload.option;
     },
     changeOptionTitle: (state, action: PayloadAction<{ idx: number; content: string }>) => {
-      state.question.optionList[action.payload.idx] = action.payload.content;
+      console.log('텍스트 변화');
+      console.log(action.payload.idx);
+      console.log(action.payload.content);
+      state.question.optionList[action.payload.idx].content = action.payload.content;
     },
-    updateOptionList: (state, action: PayloadAction<{ list: string[] }>) => {
+    updateOptionList: (state, action: PayloadAction<{ list: option[] }>) => {
       state.question.optionList = action.payload.list;
     },
   },
