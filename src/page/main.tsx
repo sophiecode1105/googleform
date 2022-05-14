@@ -12,6 +12,7 @@ const Container = styled.div`
 
 const Main = () => {
   const questionList = useSelector((state: RootState) => state.surveyData.questions);
+  console.log('quesList', questionList);
 
   return (
     <Container>

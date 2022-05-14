@@ -18,7 +18,7 @@ const Option = ({
   idx: number;
   cancellable: boolean;
 }) => {
-  let defaultText = '';
+  let defaultText = item.content ? item.content : '';
   const dispatch = useAppDispatch();
   const [text, setText] = useState<string>(defaultText);
   const [writing, setWriting] = useState<boolean>(false);
@@ -26,6 +26,8 @@ const Option = ({
   useEffect(() => {
     if (item.content === '기타...') {
       setText('기타...');
+    } else if (item.content) {
+      defaultText = item.content;
     } else {
       defaultText = '옵션 ' + item.order;
       setText(defaultText);
@@ -44,6 +46,8 @@ const Option = ({
       })
     );
   };
+
+  console.log('아이템', item);
 
   return (
     <OptionWrap>

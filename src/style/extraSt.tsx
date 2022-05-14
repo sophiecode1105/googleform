@@ -13,6 +13,7 @@ export const ExtraIconWrap = styled.div`
   padding: 10px;
   border-radius: 100%;
   margin: 5px;
+  cursor: pointer;
   &:hover {
     background-color: rgb(247, 247, 247);
   }
