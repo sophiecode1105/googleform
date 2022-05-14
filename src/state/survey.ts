@@ -1,4 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { idText } from 'typescript';
+import Question from '../components/Question/question';
 import { surveyState, option } from '../model/typeDefs';
 
 const initialState: surveyState = {
@@ -6,16 +8,19 @@ const initialState: surveyState = {
     title: '제목 없는 설문지',
     explain: '',
   },
-  question: {
-    title: '',
-    optionType: '단답형',
-    optionList: [
-      {
-        content: '옵션 1',
-        order: 1,
-      },
-    ],
-  },
+  questions: [
+    {
+      title: '',
+      optionType: '단답형',
+      optionList: [
+        {
+          content: '옵션 1',
+          order: 1,
+        },
+      ],
+    },
+  ],
+
   value: 'title',
 };
 
@@ -30,21 +35,31 @@ export const surveyDataSlice = createSlice({
     updateFocused: (state, action: PayloadAction<{ title: string }>) => {
       state.value = action.payload.title;
     },
-    changeOptionType: (state, action: PayloadAction<{ option: string }>) => {
-      state.question.optionType = action.payload.option;
+    changeOptionType: (state, action: PayloadAction<{ qIdx: number; option: string }>) => {
+      const { qIdx, option } = action.payload;
+      state.questions[qIdx].optionType = option;
     },
-    changeOptionTitle: (state, action: PayloadAction<{ idx: number; content: string }>) => {
-      console.log('텍스트 변화');
-      console.log(action.payload.idx);
-      console.log(action.payload.content);
-      state.question.optionList[action.payload.idx].content = action.payload.content;
+    changeOptionTitle: (state, action: PayloadAction<{ qIdx: number; idx: number; content: string }>) => {
+      const { qIdx, idx, content } = action.payload;
+      state.questions[qIdx].optionList[idx].content = content;
     },
-    updateOptionList: (state, action: PayloadAction<{ list: option[] }>) => {
-      state.question.optionList = action.payload.list;
+    updateOptionList: (state, action: PayloadAction<{ qIdx: number; list: option[] }>) => {
+      const { qIdx, list } = action.payload;
+      state.questions[qIdx].optionList = action.payload.list;
+    },
+    removeItemFromOptionList: (state, action: PayloadAction<{ qIdx: number; itemIdx: number }>) => {
+      const { qIdx, itemIdx } = action.payload;
+      state.questions[qIdx].optionList = state.questions[qIdx].optionList.filter((_, i) => i !== itemIdx);
     },
   },
 });
 
-export const { updateHedaerData, updateFocused, changeOptionType, changeOptionTitle, updateOptionList } =
-  surveyDataSlice.actions;
+export const {
+  updateHedaerData,
+  updateFocused,
+  changeOptionType,
+  changeOptionTitle,
+  updateOptionList,
+  removeItemFromOptionList,
+} = surveyDataSlice.actions;
 export default surveyDataSlice.reducer;

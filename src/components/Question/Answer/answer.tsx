@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../../state/hook';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../state/store';
+import Option from './option';
+import { updateOptionList } from '../../../state/survey';
+import { option } from '../../../model/typeDefs';
 import {
   AddOptionInput,
   AddWrap,
@@ -13,19 +13,13 @@ import {
   OptionWrap,
   TextDiv,
 } from '../../../style/questionSt';
-import Option from './option';
-import { updateOptionList } from '../../../state/survey';
-import { has } from 'immer/dist/internal';
 
-const Answer = () => {
+const Answer = ({ optionType, optionList, qIdx }: { optionType: string; optionList: option[]; qIdx: number }) => {
   const dispatch = useAppDispatch();
-  const optionTitle = useSelector((state: RootState) => state.surveyData.question.optionType);
-  const optionList = useSelector((state: RootState) => state.surveyData.question.optionList);
   let iconClassName = '';
-
-  if (optionTitle === '객관식 질문') {
+  if (optionType === '객관식 질문') {
     iconClassName = 'fa-regular fa-circle';
-  } else if (optionTitle === '체크박스') {
+  } else if (optionType === '체크박스') {
     iconClassName = 'fa-regular fa-square';
   }
 
@@ -43,6 +37,7 @@ const Answer = () => {
 
     dispatch(
       updateOptionList({
+        qIdx,
         list: newList,
       })
     );
@@ -50,9 +45,9 @@ const Answer = () => {
 
   const addEtc = () => {
     let newList = [...optionList, { content: '기타...', order: -1 }];
-
     dispatch(
       updateOptionList({
+        qIdx,
         list: newList,
       })
     );
@@ -60,15 +55,39 @@ const Answer = () => {
 
   return (
     <ExplainContainer>
-      {optionTitle === '장문형' || optionTitle === '단답형' ? (
-        <Explain>{`${optionTitle} 텍스트`}</Explain>
+      {optionType === '장문형' || optionType === '단답형' ? (
+        <Explain>{`${optionType} 텍스트`}</Explain>
       ) : (
         <OptionListWrap>
           {optionList.map((item, idx) => {
-            return <Option optionTitle={optionTitle} iconClassName={iconClassName} item={item} idx={idx} />;
+            let cancellable = true;
+            let containsEtc = optionList.filter((el) => el.order === -1).length;
+            let isEtc = item.order === -1;
+
+            if (isEtc) {
+              cancellable = true;
+            } else {
+              if (optionList.length <= 1) {
+                cancellable = false;
+              }
+              if (optionList.length === 2 && containsEtc) {
+                cancellable = false;
+              }
+            }
+
+            return (
+              <Option
+                optionType={optionType}
+                iconClassName={iconClassName}
+                item={item}
+                qIdx={qIdx}
+                idx={idx}
+                cancellable={cancellable}
+              />
+            );
           })}
           <OptionWrap>
-            {optionTitle === '드롭다운' ? (
+            {optionType === '드롭다운' ? (
               <OptionNum>{optionList.length + 1}</OptionNum>
             ) : (
               <OptionIcon className={iconClassName} />

@@ -6,10 +6,10 @@ import drop from '../../assets/dropbox.png';
 import down from '../../assets/down.png';
 import { useAppDispatch } from '../../state/hook';
 import { useState, useRef, useEffect } from 'react';
-import { Icon, ListWrap, Selection, Title, Wrap } from '../../style/questionSt';
+import { Icon, IconWrap, ListWrap, Selection, Title, Wrap } from '../../style/questionSt';
 import { changeOptionType } from '../../state/survey';
 
-const QuestionType = () => {
+const QuestionType = ({ qIdx }: { qIdx: number }) => {
   const dispatch = useAppDispatch();
   const side = useRef<HTMLDivElement>(null);
 
@@ -46,10 +46,10 @@ const QuestionType = () => {
         setVisible(!visible);
       }}
     >
-      <Wrap>
+      <IconWrap>
         <Icon src={choice.img} />
         <Title>{choice.title}</Title>
-      </Wrap>
+      </IconWrap>
       <Icon src={down} />
       <ListWrap visible={visible}>
         {visible
@@ -59,7 +59,7 @@ const QuestionType = () => {
                   key={i}
                   onClick={() => {
                     setChoice(list);
-                    dispatch(changeOptionType({ option: list.title }));
+                    dispatch(changeOptionType({ qIdx, option: list.title }));
                   }}
                 >
                   <Icon src={list.img} />
