@@ -8,11 +8,7 @@ export interface surveyState {
     title: string;
     explain: string;
   };
-  question: {
-    title: string;
-    optionType: string;
-    optionList: option[];
-  };
+  questions: question[];
   value: string;
 }
 
@@ -23,4 +19,10 @@ export interface visibleProp {
 export interface option {
   content: string;
   order: number;
+}
+
+export interface question {
+  title: string;
+  optionType: string;
+  optionList: option[];
 }

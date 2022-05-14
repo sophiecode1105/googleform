@@ -17,9 +17,12 @@ const Button = styled.button`
 `;
 
 const AddButton = () => {
+  const addQuestion = () => {
+    console.log('추가');
+  };
   return (
     <Container>
-      <Button>질문 추가</Button>
+      <Button onClick={addQuestion}>질문 추가</Button>
     </Container>
   );
 };

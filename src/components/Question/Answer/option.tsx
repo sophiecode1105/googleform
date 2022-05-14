@@ -1,26 +1,27 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../../state/hook';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../state/store';
-import { changeOptionTitle, updateOptionList } from '../../../state/survey';
+import { changeOptionTitle, removeItemFromOptionList } from '../../../state/survey';
 import { OptionIcon, OptionInput, OptionNum, OptionWrap } from '../../../style/questionSt';
-import { setConstantValue } from 'typescript';
 
 const Option = ({
-  optionTitle,
+  optionType,
   iconClassName,
   item,
+  qIdx,
   idx,
+  cancellable,
 }: {
-  optionTitle: string;
+  optionType: string;
   iconClassName: string;
   item: { content: string; order: number };
+  qIdx: number;
   idx: number;
+  cancellable: boolean;
 }) => {
-  const dispatch = useAppDispatch();
-  const optionList = useSelector((state: RootState) => state.surveyData.question.optionList);
-
   let defaultText = '';
+  const dispatch = useAppDispatch();
+  const [text, setText] = useState<string>(defaultText);
+  const [writing, setWriting] = useState<boolean>(false);
 
   useEffect(() => {
     if (item.content === '기타...') {
@@ -31,25 +32,22 @@ const Option = ({
     }
   }, [item.order]);
 
-  const [text, setText] = useState<string>(defaultText);
-  const [writing, setWriting] = useState<boolean>(false);
-
   useEffect(() => {
-    dispatch(changeOptionTitle({ idx: idx, content: text }));
+    dispatch(changeOptionTitle({ qIdx, idx, content: text }));
   }, [text]);
 
-  const deleteList = (idxToRemove: number) => {
-    let newList = optionList.filter((el, idx) => idx !== idxToRemove);
+  const deleteItem = (idxToRemove: number) => {
     dispatch(
-      updateOptionList({
-        list: newList,
+      removeItemFromOptionList({
+        qIdx,
+        itemIdx: idx,
       })
     );
   };
 
   return (
     <OptionWrap>
-      {optionTitle === '드롭다운' ? <OptionNum>{idx + 1}</OptionNum> : <OptionIcon className={iconClassName} />}
+      {optionType === '드롭다운' ? <OptionNum>{idx + 1}</OptionNum> : <OptionIcon className={iconClassName} />}
       <OptionInput
         type="text"
         value={writing === false && !text ? item.content : text}
@@ -66,22 +64,12 @@ const Option = ({
           }
         }}
       />
-      {item.order === -1 && optionList.length === 2 ? (
-        <OptionIcon
-          onClick={() => {
-            deleteList(idx);
-          }}
-          className="fa-solid fa-xmark"
-        />
-      ) : null}
-      {optionList.length !== 1 && optionList.length !== 2 ? (
-        <OptionIcon
-          onClick={() => {
-            deleteList(idx);
-          }}
-          className="fa-solid fa-xmark"
-        />
-      ) : null}
+      <OptionIcon
+        onClick={() => {
+          deleteItem(idx);
+        }}
+        className={cancellable ? 'fa-solid fa-xmark' : "'"}
+      />
     </OptionWrap>
   );
 };

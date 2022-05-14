@@ -1,6 +1,8 @@
 import Question from '../components/Question/question';
 import Title from '../components/Title/title';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import { RootState } from '../state/store';
 
 const Container = styled.div`
   max-width: 800px;
@@ -9,10 +11,14 @@ const Container = styled.div`
 `;
 
 const Main = () => {
+  const questionList = useSelector((state: RootState) => state.surveyData.questions);
+  console.log(questionList);
   return (
     <Container>
       <Title />
-      <Question />
+      {questionList.map((question, idx) => {
+        return <Question question={question} idx={idx} key={`q-${idx}`} />;
+      })}
     </Container>
   );
 };

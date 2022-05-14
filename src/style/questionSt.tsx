@@ -15,7 +15,6 @@ export const QuesWrap = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid black;
   width: 100%;
 `;
 
@@ -54,12 +53,17 @@ export const Selection = styled.div`
 export const ListWrap = styled.div<visibleProp>`
   display: ${(props) => (props.visible ? 'flex' : 'none')};
   flex-direction: column;
-  border: 2px solid black;
+  box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%);
   position: absolute;
   width: 100%;
   right: 0;
   background-color: #fff;
+  padding: 10px;
+`;
 
+export const IconWrap = styled.div`
+  display: flex;
+  align-items: center;
   padding: 10px;
 `;
 
@@ -67,6 +71,9 @@ export const Wrap = styled.div`
   display: flex;
   align-items: center;
   padding: 10px;
+  &:hover {
+    background-color: rgb(234, 234, 234);
+  }
 `;
 
 export const Icon = styled.img`
@@ -88,8 +95,9 @@ export const Explain = styled.div`
   color: rgb(98, 103, 107);
   border-bottom: 1px dotted rgba(0, 0, 0, 0.3);
   padding: 20px 20px 10px 0px;
-  margin-left: 20px;
+  margin: 0px 0px 20px 20px;
   user-select: none;
+  font-size: 15px;
 `;
 
 export const OptionListWrap = styled.div`
