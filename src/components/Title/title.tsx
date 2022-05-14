@@ -1,6 +1,4 @@
-import { useForm } from 'react-hook-form';
-import { FormData } from '../../model/typeDefs';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../state/hook';
 import { updateHedaerData } from '../../state/survey';
 import { useSelector } from 'react-redux';
@@ -11,23 +9,33 @@ const Title = () => {
   const dispatch = useAppDispatch();
   const contentValue = useSelector((state: RootState) => state.surveyData.header);
 
+  const [title, setTitle] = useState<string>(contentValue.title);
+  const [explain, setExplain] = useState<string>(contentValue.explain);
+
   useEffect(() => {
-    setValue('title', contentValue.title);
-  }, []);
-
-  //useForm register -> input의 이름으로 등록을 해주는것을 의미한다.
-  //watch -> 실시간 바뀌는 값을 알수있다. (event.target.value)의 역할
-  //setValue -> 해당 inputdp value를 넣어주는 역할
-  const { register, watch, setValue } = useForm<FormData>({ mode: 'onChange' });
-
-  dispatch(updateHedaerData({ title: watch().title, explain: watch().explain }));
+    dispatch(updateHedaerData({ title, explain }));
+  }, [title, explain]);
 
   return (
     <Container>
       <Form>
         <InputWrap>
-          <TitleInput type="text" placeholder="설문지 제목" {...register('title')} />
-          <Input type="text" placeholder="설문지 설명" {...register('explain')} />
+          <TitleInput
+            type="text"
+            placeholder="설문지 제목"
+            value={title}
+            onChange={(event) => {
+              setTitle(event.target.value);
+            }}
+          />
+          <Input
+            type="text"
+            placeholder="설문지 설명"
+            value={explain}
+            onChange={(event) => {
+              setExplain(event.target.value);
+            }}
+          />
         </InputWrap>
       </Form>
     </Container>
