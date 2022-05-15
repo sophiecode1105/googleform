@@ -84,6 +84,12 @@ export const surveyDataSlice = createSlice({
       const { submitState } = action.payload;
       state.submit = submitState;
     },
+    resetAllAnswerData: (state, action: PayloadAction) => {
+      state.questions.forEach((question) => {
+        question.answer = '';
+      });
+      state.submit = false;
+    },
   },
 });
 
@@ -100,5 +106,6 @@ export const {
   updateAllData,
   updateAnswerData,
   changeSubmitState,
+  resetAllAnswerData,
 } = surveyDataSlice.actions;
 export default surveyDataSlice.reducer;

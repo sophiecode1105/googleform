@@ -1,5 +1,4 @@
-import path from 'path';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { option } from '../../model/typeDefs';
 import { useAppDispatch } from '../../state/hook';
@@ -25,25 +24,34 @@ const PvSelect = ({
   const { pathname } = useLocation();
 
   console.log('정답을알려줘~', answer);
+  const checkRef = useRef() as React.MutableRefObject<HTMLInputElement>;
+  const radioRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
   let name = title + qIdx;
   let radioId = option.content + qIdx + idx + '라디오';
   let checkId = option.content + qIdx + idx + '체크';
 
   useEffect(() => {
-    if (pathname === '/result' && typeof answer === 'string') {
+    if (typeof answer === 'string') {
       if (answer.includes(option.content)) {
         const radiobuttonValue = document.getElementById(radioId) as HTMLInputElement;
         radiobuttonValue.checked = true;
+      } else if (answer === '') {
+        if (radioRef?.current?.checked) {
+          radioRef.current.checked = false;
+        }
+        if (checkRef?.current?.checked) {
+          checkRef.current.checked = false;
+        }
       }
     }
-    if (pathname == '/result' && Array.isArray(answer)) {
+    if (Array.isArray(answer)) {
       if (answer.includes(option.content)) {
         const checkBoxValue = document.getElementById(checkId) as HTMLInputElement;
         checkBoxValue.checked = true;
       }
     }
-  }, []);
+  }, [answer]);
 
   const updateCheckBoxAnswer = () => {
     console.log('찍히냐');
@@ -67,6 +75,7 @@ const PvSelect = ({
     <SelectWrap>
       {sort === 'checkbox' ? (
         <CheckInput
+          ref={checkRef}
           id={checkId}
           result={pathname === '/result'}
           onClick={(e) => {
@@ -81,6 +90,7 @@ const PvSelect = ({
       ) : null}
       {sort === 'radio' ? (
         <RadioInput
+          ref={radioRef}
           onClick={(e) => {
             if (pathname === '/result') {
               e.preventDefault();

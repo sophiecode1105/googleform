@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { option, question } from '../../../../model/typeDefs';
 import { useAppDispatch } from '../../../../state/hook';
 import { changeOptionTitle, removeItemFromOptionList } from '../../../../state/survey';
-import { OptionIcon, OptionInput, OptionNum, OptionWrap } from '../../../../style/questionSt';
+import { Exclamation, OptionIcon, OptionInput, OptionNum, OptionWrap } from '../../../../style/questionSt';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../state/store';
 
@@ -94,7 +94,12 @@ const Option = ({
         className={cancellable ? 'fa-solid fa-xmark' : "'"}
       />
 
-      {!isUnique ? <h1>NOT UNIQUE</h1> : null}
+      {!isUnique ? (
+        <>
+          <Exclamation className="fa-solid fa-triangle-exclamation" />
+          <span>중복!</span>
+        </>
+      ) : null}
     </OptionWrap>
   );
 };

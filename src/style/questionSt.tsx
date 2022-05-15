@@ -131,7 +131,7 @@ export const OptionIcon = styled.div`
   margin-right: 10px;
   color: rgb(175, 175, 175);
 
-  &:last-child {
+  &:nth-child(3) {
     color: black;
     cursor: pointer;
   }
@@ -256,4 +256,5 @@ export const ErrorMessage = styled.div`
 
 export const Exclamation = styled.i`
   margin-right: 10px;
+  color: rgb(205, 27, 29);
 `;
