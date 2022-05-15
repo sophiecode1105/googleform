@@ -13,9 +13,8 @@ const NavBar = () => {
   const srcList = [document_men, document_women, survey_men, survey_women];
 
   const surveyData = useSelector((state: RootState) => state.surveyData);
-  const surveyAnswer = useSelector((state: RootState) => state.surveyAnswer);
 
-  console.log('데이터', surveyAnswer);
+  console.log('업데이트가 되었나', surveyData);
 
   const pageMoveToPreview = () => {
     localStorage.setItem('preview', JSON.stringify(surveyData));

@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { title } from 'process';
 import short from '../assets/short.png';
 import { surveyState, option, question, type } from '../model/typeDefs';
 
@@ -11,6 +10,7 @@ const initialState: surveyState = {
   questions: [
     {
       title: '',
+      answer: '',
       optionType: {
         typeTitle: '단답형',
         sort: 'short-text',
@@ -25,8 +25,7 @@ const initialState: surveyState = {
       ],
     },
   ],
-
-  value: 'title',
+  submit: false,
 };
 
 export const surveyDataSlice = createSlice({
@@ -37,10 +36,6 @@ export const surveyDataSlice = createSlice({
       const { title, explain } = action.payload;
       state.header.title = title;
       state.header.explain = explain;
-    },
-    updateFocused: (state, action: PayloadAction<{ title: string }>) => {
-      const { title } = action.payload;
-      state.value = title;
     },
     changeQuestionTitle: (state, action: PayloadAction<{ qIdx: number; title: string }>) => {
       const { qIdx, title } = action.payload;
@@ -76,12 +71,24 @@ export const surveyDataSlice = createSlice({
       const { qIdx } = action.payload;
       state.questions = state.questions.filter((_, i) => i !== qIdx);
     },
+    updateAllData: (state, action: PayloadAction<{ surveyData: surveyState }>) => {
+      const { header, questions } = action.payload.surveyData;
+      state.header = header;
+      state.questions = questions;
+    },
+    updateAnswerData: (state, action: PayloadAction<{ qIdx: number; answer: string | string[] }>) => {
+      const { qIdx, answer } = action.payload;
+      state.questions[qIdx].answer = answer;
+    },
+    changeSubmitState: (state, action: PayloadAction<{ submitState: boolean }>) => {
+      const { submitState } = action.payload;
+      state.submit = submitState;
+    },
   },
 });
 
 export const {
   updateHedaerData,
-  updateFocused,
   changeQuestionTitle,
   changeOptionType,
   changeNeccessaryState,
@@ -90,5 +97,8 @@ export const {
   removeItemFromOptionList,
   addQuestionList,
   removeQuestionFromQuestions,
+  updateAllData,
+  updateAnswerData,
+  changeSubmitState,
 } = surveyDataSlice.actions;
 export default surveyDataSlice.reducer;

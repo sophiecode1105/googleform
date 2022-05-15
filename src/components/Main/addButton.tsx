@@ -9,6 +9,7 @@ const AddButton = () => {
   const addQuestion = () => {
     let newQuestion = {
       title: '',
+      answer: '',
       optionType: {
         typeTitle: '단답형',
         sort: 'short-text',
@@ -21,6 +22,7 @@ const AddButton = () => {
           order: 1,
         },
       ],
+      submit: false,
     };
 
     dispatch(addQuestionList({ newQuestion }));
