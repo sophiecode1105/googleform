@@ -14,8 +14,6 @@ const PvQuestion = ({ isSubmit, question, qIdx }: { isSubmit: boolean; question:
   let dropList = lodash.cloneDeep(questions);
   dropList.unshift({ content: '선택', order: 0 });
 
-  console.log('wpcnf', isSubmit);
-  console.log('필수', necessary);
   console.log(question.answer);
 
   return (
@@ -33,7 +31,15 @@ const PvQuestion = ({ isSubmit, question, qIdx }: { isSubmit: boolean; question:
             questions.map((option, idx) => {
               console.log('option', option);
               return (
-                <PvSelect qIdx={qIdx} title={title} sort={sort} option={option} key={idx} answer={question.answer} />
+                <PvSelect
+                  qIdx={qIdx}
+                  title={title}
+                  sort={sort}
+                  option={option}
+                  key={idx}
+                  answer={question.answer}
+                  idx={idx}
+                />
               );
             })
           )}

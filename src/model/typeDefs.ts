@@ -47,3 +47,12 @@ export interface title {
   title: string;
   explain: string;
 }
+
+export interface textAreaProp {
+  lines: number;
+  result?: boolean;
+}
+
+export interface resultProp {
+  result?: boolean;
+}

@@ -1,12 +1,11 @@
 import styled from 'styled-components';
 import PvTitle from '../components/Preview/pvTitle';
-import { useEffect, useState } from 'react';
-import { surveyState } from '../model/typeDefs';
+import { useEffect } from 'react';
 import PvQuestion from '../components/Preview/pvQuestion';
 import { Button, ButtonWrap, DeleteAnswer } from '../style/buttonSt';
 import { useSelector } from 'react-redux';
 import { RootState } from '../state/store';
-import survey, { changeSubmitState, updateAllData } from '../state/survey';
+import { changeSubmitState, updateAllData } from '../state/survey';
 import { useAppDispatch } from '../state/hook';
 
 const Container = styled.div`
@@ -51,7 +50,7 @@ const Preview = () => {
 
   return (
     <Container>
-      <PvTitle necessary={Boolean(necessary.length)} header={surveyData.header}></PvTitle>
+      <PvTitle necessary={Boolean(necessary.length)} header={surveyData.header} />
       {surveyData.questions.map((question, idx) => {
         return <PvQuestion isSubmit={isSubmit} question={question} qIdx={idx} />;
       })}

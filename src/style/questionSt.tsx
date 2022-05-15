@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { visibleProp } from '../model/typeDefs';
+import { textAreaProp, visibleProp, resultProp } from '../model/typeDefs';
 
 export const Container = styled.div`
   margin: 20px 0px;
@@ -49,7 +49,7 @@ export const QuesTitleInput = styled.input`
   }
 `;
 
-export const Selection = styled.div`
+export const Selection = styled.div<resultProp>`
   position: relative;
   display: flex;
   align-items: center;
@@ -61,7 +61,7 @@ export const Selection = styled.div`
   & ::selection {
     -webkit-tap-highlight-color: transparent;
   }
-  cursor: pointer;
+  cursor: ${(props) => (props.result ? null : 'pointer')};
 `;
 
 export const ListWrap = styled.div<visibleProp>`
@@ -180,21 +180,17 @@ export const TextDiv = styled.div`
   }
 `;
 
-export const AnswerInput = styled.input`
+export const AnswerInput = styled.input<resultProp>`
   all: unset;
   width: 40%;
   font-size: 14px;
   padding-bottom: 5px;
   border-bottom: 1px solid rgb(217, 217, 217);
   &:focus {
-    border-bottom: 1.5px solid rgb(18, 9, 99);
-    transition: 0.7s;
+    border-bottom: ${(props) => (props.result ? null : '1.5px solid rgb(18, 9, 99)')};
+    transition: ${(props) => (props.result ? null : '0.7s')};
   }
 `;
-
-interface textAreaProp {
-  lines: number;
-}
 
 export const AnswerTextArea = styled.textarea<textAreaProp>`
   all: unset;
@@ -206,8 +202,8 @@ export const AnswerTextArea = styled.textarea<textAreaProp>`
   overflow: auto;
   border-bottom: 1px solid rgb(217, 217, 217);
   &:focus {
-    border-bottom: 1.5px solid rgb(18, 9, 99);
-    transition: 0.7s;
+    border-bottom: ${(props) => (props.result ? null : '1.5px solid rgb(18, 9, 99)')};
+    transition: ${(props) => (props.result ? null : '0.7s')};
   }
 `;
 
@@ -221,14 +217,14 @@ export const SelectLabel = styled.label`
   margin-left: 10px;
 `;
 
-export const CheckInput = styled.input`
+export const CheckInput = styled.input<resultProp>`
   appearance: none;
   width: 1.2rem;
   height: 1.2rem;
   border: 1px solid rgb(77, 80, 84);
   border-radius: 0.15rem;
   margin: 10px 0px;
-  cursor: pointer;
+  cursor: ${(props) => (props.result ? null : 'pointer')};
   &:checked {
     border-color: transparent;
     background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/White_check.svg/1200px-White_check.svg.png');
@@ -239,12 +235,12 @@ export const CheckInput = styled.input`
   }
 `;
 
-export const RadioInput = styled.input`
+export const RadioInput = styled.input<resultProp>`
   accent-color: rgb(18, 9, 99);
   width: 18px;
   height: 18px;
   margin: 10px 0px;
-  cursor: pointer;
+  cursor: ${(props) => (props.result ? null : 'pointer')};
 `;
 
 export const SelectWrap = styled.div`
