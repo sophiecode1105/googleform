@@ -180,15 +180,30 @@ export const TextDiv = styled.div`
   }
 `;
 
-interface sizeProp {
-  short: boolean;
-}
-
-export const AnswerInput = styled.input<sizeProp>`
+export const AnswerInput = styled.input`
   all: unset;
-  width: ${(props) => (props.short ? '40%' : '100%')};
+  width: 40%;
   font-size: 14px;
   padding-bottom: 5px;
+  border-bottom: 1px solid rgb(217, 217, 217);
+  &:focus {
+    border-bottom: 1.5px solid rgb(18, 9, 99);
+    transition: 0.7s;
+  }
+`;
+
+interface textAreaProp {
+  lines: number;
+}
+
+export const AnswerTextArea = styled.textarea<textAreaProp>`
+  all: unset;
+  width: 100%;
+  font-size: 14px;
+  padding-bottom: 5px;
+  height: ${(props) => String(props.lines * 14) + 'px'};
+  max-height: 200px;
+  overflow: auto;
   border-bottom: 1px solid rgb(217, 217, 217);
   &:focus {
     border-bottom: 1.5px solid rgb(18, 9, 99);

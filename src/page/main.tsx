@@ -8,12 +8,11 @@ import AddButton from '../components/Main/addButton';
 const Container = styled.div`
   max-width: 800px;
   width: 100%;
-  margin: 0 auto;
+  margin: 0 auto 20% auto;
 `;
 
 const Main = () => {
   const questionList = useSelector((state: RootState) => state.surveyData.questions);
-  console.log('quesList', questionList);
 
   return (
     <Container>

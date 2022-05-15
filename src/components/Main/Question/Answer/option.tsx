@@ -1,7 +1,11 @@
+import { uniq } from 'lodash';
 import { useEffect, useState } from 'react';
+import { option, question } from '../../../../model/typeDefs';
 import { useAppDispatch } from '../../../../state/hook';
 import { changeOptionTitle, removeItemFromOptionList } from '../../../../state/survey';
 import { OptionIcon, OptionInput, OptionNum, OptionWrap } from '../../../../style/questionSt';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../state/store';
 
 const Option = ({
   optionType,
@@ -22,6 +26,8 @@ const Option = ({
   const dispatch = useAppDispatch();
   const [text, setText] = useState<string>(defaultText);
   const [writing, setWriting] = useState<boolean>(false);
+  const [isUnique, setIsUnique] = useState<boolean>(true);
+  const surveyData = useSelector((state: RootState) => state.surveyData);
 
   useEffect(() => {
     setText(item.content);
@@ -36,8 +42,17 @@ const Option = ({
     }
   }, [item.order]);
 
+  // useEffect(() => {}, [isUnique]);
+
   useEffect(() => {
-    dispatch(changeOptionTitle({ qIdx, idx, content: text }));
+    let unique =
+      surveyData.questions[qIdx].optionList.filter((el, i) => el.content.trim() === text.trim() && i !== idx).length ===
+      0;
+    if (unique) {
+      console.log('unique SD->', surveyData);
+      dispatch(changeOptionTitle({ qIdx, idx, content: text }));
+    }
+    setIsUnique(unique);
   }, [text]);
 
   const deleteItem = (idxToRemove: number) => {
@@ -54,27 +69,32 @@ const Option = ({
       {optionType === '드롭다운' ? <OptionNum>{idx + 1}</OptionNum> : <OptionIcon className={iconClassName} />}
       <OptionInput
         type="text"
+        readOnly={item.order === -1}
         value={writing === false && !text ? item.content : text}
         onChange={(event) => {
           setText(event.target.value);
         }}
         onFocus={() => {
-          console.log(text, item.content);
           setWriting(true);
         }}
         onBlur={() => {
           setWriting(false);
           if (!text) {
             setText(defaultText);
+          } else if (!isUnique) {
+            setText('옵션 ' + String(item.order));
           }
         }}
       />
+
       <OptionIcon
         onClick={() => {
           deleteItem(idx);
         }}
         className={cancellable ? 'fa-solid fa-xmark' : "'"}
       />
+
+      {!isUnique ? <h1>NOT UNIQUE</h1> : null}
     </OptionWrap>
   );
 };

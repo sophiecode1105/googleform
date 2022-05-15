@@ -34,6 +34,19 @@ const Preview = () => {
 
   const changePageToResult = () => {
     dispatch(changeSubmitState({ submitState: true }));
+    let necessaryQuestions = surveyData.questions.filter((question) => {
+      return question.necessary;
+    });
+    let emptyAnswers = necessaryQuestions.filter((el) => {
+      return el.answer === '';
+    });
+    console.log('헤이', emptyAnswers.length);
+    if (emptyAnswers.length !== 0) {
+      return;
+    } else {
+      localStorage.setItem('result', JSON.stringify(surveyData));
+      window.open('/result', '_blank');
+    }
   };
 
   return (
