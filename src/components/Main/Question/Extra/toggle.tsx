@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { useAppDispatch } from '../../../state/hook';
-import { changeNeccessaryState } from '../../../state/survey';
-import { ToggleCircle, ToggleContainer, ToggleInside } from '../../../style/extraSt';
+import { useAppDispatch } from '../../../../state/hook';
+import { changeNeccessaryState } from '../../../../state/survey';
+import { ToggleCircle, ToggleContainer, ToggleInside } from '../../../../style/extraSt';
 
 const Toggle = ({ isOn, qIdx }: { isOn: boolean; qIdx: number }) => {
   const dispatch = useAppDispatch();

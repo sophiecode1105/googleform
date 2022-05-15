@@ -15,3 +15,19 @@ export const Button = styled.button`
   padding: 1rem;
   cursor: pointer;
 `;
+
+export const DeleteAnswer = styled.div`
+  color: rgb(239, 84, 29);
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+  &:hover {
+    background-color: #f6e2ce;
+  }
+`;
+
+export const ButtonWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;

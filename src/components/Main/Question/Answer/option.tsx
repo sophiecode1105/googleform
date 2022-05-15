@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useAppDispatch } from '../../../state/hook';
-import { changeOptionTitle, removeItemFromOptionList } from '../../../state/survey';
-import { OptionIcon, OptionInput, OptionNum, OptionWrap } from '../../../style/questionSt';
+import { useAppDispatch } from '../../../../state/hook';
+import { changeOptionTitle, removeItemFromOptionList } from '../../../../state/survey';
+import { OptionIcon, OptionInput, OptionNum, OptionWrap } from '../../../../style/questionSt';
 
 const Option = ({
   optionType,
@@ -24,9 +24,11 @@ const Option = ({
   const [writing, setWriting] = useState<boolean>(false);
 
   useEffect(() => {
-    if (item.content === '기타...') {
-      setText('기타...');
-    } else if (item.content) {
+    setText(item.content);
+  }, [item.content]);
+
+  useEffect(() => {
+    if (item.content) {
       defaultText = item.content;
     } else {
       defaultText = '옵션 ' + item.order;
@@ -47,8 +49,6 @@ const Option = ({
     );
   };
 
-  console.log('아이템', item);
-
   return (
     <OptionWrap>
       {optionType === '드롭다운' ? <OptionNum>{idx + 1}</OptionNum> : <OptionIcon className={iconClassName} />}
@@ -59,6 +59,7 @@ const Option = ({
           setText(event.target.value);
         }}
         onFocus={() => {
+          console.log(text, item.content);
           setWriting(true);
         }}
         onBlur={() => {

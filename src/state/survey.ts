@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { idText } from 'typescript';
-import Question from '../components/Question/question';
+import { title } from 'process';
 import short from '../assets/short.png';
 import { surveyState, option, question, type } from '../model/typeDefs';
 
@@ -14,7 +13,7 @@ const initialState: surveyState = {
       title: '',
       optionType: {
         typeTitle: '단답형',
-        sort: 'short',
+        sort: 'short-text',
         img: short,
       },
       necessary: false,
@@ -35,11 +34,13 @@ export const surveyDataSlice = createSlice({
   initialState,
   reducers: {
     updateHedaerData: (state, action: PayloadAction<{ title: string; explain: string }>) => {
-      state.header.title = action.payload.title;
-      state.header.explain = action.payload.explain;
+      const { title, explain } = action.payload;
+      state.header.title = title;
+      state.header.explain = explain;
     },
     updateFocused: (state, action: PayloadAction<{ title: string }>) => {
-      state.value = action.payload.title;
+      const { title } = action.payload;
+      state.value = title;
     },
     changeQuestionTitle: (state, action: PayloadAction<{ qIdx: number; title: string }>) => {
       const { qIdx, title } = action.payload;

@@ -1,7 +1,7 @@
-import { useAppDispatch } from '../state/hook';
-import { addQuestionList } from '../state/survey';
-import { Button, Container } from '../style/button';
-import short from '../assets/short.png';
+import { useAppDispatch } from '../../state/hook';
+import { addQuestionList } from '../../state/survey';
+import { Button, Container } from '../../style/buttonSt';
+import short from '../../assets/short.png';
 
 const AddButton = () => {
   const dispatch = useAppDispatch();
@@ -11,7 +11,7 @@ const AddButton = () => {
       title: '',
       optionType: {
         typeTitle: '단답형',
-        sort: 'short',
+        sort: 'short-text',
         img: short,
       },
       necessary: false,

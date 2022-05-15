@@ -11,6 +11,11 @@ export const Container = styled.div`
   padding: 10px;
 `;
 
+export const PvQuesWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const QuesWrap = styled.div`
   display: flex;
   align-items: center;
@@ -18,7 +23,16 @@ export const QuesWrap = styled.div`
   width: 100%;
 `;
 
-export const QuesTitle = styled.input`
+export const QuesTitle = styled.div`
+  margin: 20px;
+  width: auto;
+  font-size: 18px;
+  > span {
+    color: rgb(205, 27, 29);
+  }
+`;
+
+export const QuesTitleInput = styled.input`
   all: unset;
   width: 50%;
   margin: 20px;
@@ -54,6 +68,7 @@ export const ListWrap = styled.div<visibleProp>`
   display: ${(props) => (props.visible ? 'flex' : 'none')};
   flex-direction: column;
   box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%);
+  border-radius: 5px;
   position: absolute;
   width: 100%;
   right: 0;
@@ -163,4 +178,61 @@ export const TextDiv = styled.div`
       background-color: rgb(246, 249, 254);
     }
   }
+`;
+
+interface sizeProp {
+  short: boolean;
+}
+
+export const AnswerInput = styled.input<sizeProp>`
+  all: unset;
+  width: ${(props) => (props.short ? '40%' : '100%')};
+  font-size: 14px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgb(217, 217, 217);
+  &:focus {
+    border-bottom: 1.5px solid rgb(18, 9, 99);
+    transition: 0.7s;
+  }
+`;
+
+export const SelectListWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+`;
+
+export const SelectLabel = styled.label`
+  margin-left: 10px;
+`;
+
+export const CheckInput = styled.input`
+  appearance: none;
+  width: 1.2rem;
+  height: 1.2rem;
+  border: 1px solid rgb(77, 80, 84);
+  border-radius: 0.15rem;
+  margin: 10px 0px;
+  cursor: pointer;
+  &:checked {
+    border-color: transparent;
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/White_check.svg/1200px-White_check.svg.png');
+    background-size: 100% 100%;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-color: rgb(18, 9, 99);
+  }
+`;
+
+export const RadioInput = styled.input`
+  accent-color: rgb(18, 9, 99);
+  width: 18px;
+  height: 18px;
+  margin: 10px 0px;
+  cursor: pointer;
+`;
+
+export const SelectWrap = styled.div`
+  display: flex;
+  align-items: center;
 `;

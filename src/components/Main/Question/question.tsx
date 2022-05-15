@@ -1,10 +1,10 @@
-import { useAppDispatch } from '../../state/hook';
-import { question } from '../../model/typeDefs';
-import { Container, QuesTitle, QuesWrap } from '../../style/questionSt';
+import { useAppDispatch } from '../../../state/hook';
+import { question } from '../../../model/typeDefs';
+import { Container, QuesTitleInput, QuesWrap } from '../../../style/questionSt';
 import Answer from './Answer/answer';
 import ExtraFeature from './Extra/extraFeature';
 import QuestionType from './questionType';
-import { changeQuestionTitle } from '../../state/survey';
+import { changeQuestionTitle } from '../../../state/survey';
 
 const Question = ({ question, idx }: { question: question; idx: number }) => {
   const dispatch = useAppDispatch();
@@ -12,7 +12,7 @@ const Question = ({ question, idx }: { question: question; idx: number }) => {
   return (
     <Container>
       <QuesWrap>
-        <QuesTitle
+        <QuesTitleInput
           type="text"
           placeholder="질문"
           value={question.title}

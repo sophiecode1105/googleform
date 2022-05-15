@@ -1,7 +1,7 @@
-import { useAppDispatch } from '../../../state/hook';
+import { useAppDispatch } from '../../../../state/hook';
 import Option from './option';
-import { updateOptionList } from '../../../state/survey';
-import { option } from '../../../model/typeDefs';
+import { updateOptionList } from '../../../../state/survey';
+import { option } from '../../../../model/typeDefs';
 import {
   AddOptionInput,
   AddWrap,
@@ -12,9 +12,11 @@ import {
   OptionNum,
   OptionWrap,
   TextDiv,
-} from '../../../style/questionSt';
+} from '../../../../style/questionSt';
+import { useEffect } from 'react';
 
 const Answer = ({ optionType, optionList, qIdx }: { optionType: string; optionList: option[]; qIdx: number }) => {
+  useEffect(() => {}, [optionList.length]);
   const dispatch = useAppDispatch();
   let iconClassName = '';
   if (optionType === '객관식 질문') {
@@ -24,14 +26,18 @@ const Answer = ({ optionType, optionList, qIdx }: { optionType: string; optionLi
   }
 
   const addList = () => {
-    let newItem = { content: '옵션 ' + (optionList.length + 1), order: optionList.length + 1 };
+    let hasEtc = optionList[optionList.length - 1].order === -1;
     let newList;
-    if (optionList[optionList.length - 1].order === -1) {
+
+    if (hasEtc) {
+      let newItem = { content: '옵션 ' + optionList.length, order: optionList.length };
+      newItem.order -= 1;
       newList = optionList
         .filter((item) => item.order !== -1)
         .concat(newItem)
         .concat(optionList.filter((item) => item.order === -1));
     } else {
+      let newItem = { content: '옵션 ' + (optionList.length + 1), order: optionList.length + 1 };
       newList = [...optionList, newItem];
     }
 

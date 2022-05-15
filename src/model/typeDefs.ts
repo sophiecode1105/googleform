@@ -1,8 +1,3 @@
-export type FormData = {
-  title: string;
-  explain: string;
-};
-
 export interface surveyState {
   header: {
     title: string;
@@ -12,6 +7,19 @@ export interface surveyState {
   value: string;
 }
 
+export interface answerState {
+  header: {
+    title: string;
+    explain: string;
+  };
+  results: answer[];
+}
+export interface answer {
+  title: string;
+  answer: string;
+  necessary: boolean;
+  optionType: string;
+}
 export interface visibleProp {
   visible: boolean;
 }
@@ -32,4 +40,9 @@ export interface type {
   typeTitle: string;
   sort: string;
   img: string;
+}
+
+export interface title {
+  title: string;
+  explain: string;
 }
