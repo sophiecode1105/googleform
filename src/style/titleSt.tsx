@@ -10,7 +10,13 @@ export const Container = styled.div`
   padding: 10px;
 `;
 
-export const Form = styled.form``;
+export const Form = styled.form`
+  > span {
+    margin-left: 20px;
+    color: rgb(98, 103, 107);
+    font-size: 13px;
+  }
+`;
 
 export const InputWrap = styled.div`
   width: 100%;

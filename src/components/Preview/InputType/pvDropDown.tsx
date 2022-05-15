@@ -4,10 +4,12 @@ import { Icon, IconWrap, ListWrap, Selection, Title, Wrap } from '../../../style
 import down from '../../../assets/down.png';
 import { useAppDispatch } from '../../../state/hook';
 import { updateAnswerData } from '../../../state/survey';
+import { useLocation } from 'react-router-dom';
 
 const PvDropDown = ({ options, qIdx, answer }: { options: option[]; qIdx: number; answer: string | string[] }) => {
   const dispatch = useAppDispatch();
   const side = useRef<HTMLDivElement>(null);
+  const { pathname } = useLocation();
 
   const [visible, setVisible] = useState<boolean>(false);
 
@@ -27,9 +29,14 @@ const PvDropDown = ({ options, qIdx, answer }: { options: option[]; qIdx: number
 
   return (
     <Selection
+      result={pathname === '/result'}
       ref={side}
-      onClick={() => {
-        setVisible(!visible);
+      onClick={(e) => {
+        if (pathname === '/result') {
+          e.preventDefault();
+        } else {
+          setVisible(!visible);
+        }
       }}
     >
       <IconWrap>

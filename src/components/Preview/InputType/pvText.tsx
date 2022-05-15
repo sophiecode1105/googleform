@@ -1,21 +1,40 @@
+import { useLocation } from 'react-router-dom';
 import { question } from '../../../model/typeDefs';
 import { useAppDispatch } from '../../../state/hook';
 import { updateAnswerData } from '../../../state/survey';
-import { AnswerInput, ErrorMessage, Exclamation } from '../../../style/questionSt';
+import { AnswerInput, AnswerTextArea, ErrorMessage, Exclamation } from '../../../style/questionSt';
 
 const PvText = ({ question, sort, qIdx }: { question: question; sort: string; qIdx: number }) => {
   const dispatch = useAppDispatch();
+  const { pathname } = useLocation();
 
   return (
-    <AnswerInput
-      type="text"
-      placeholder="내 답변"
-      value={question.answer}
-      short={sort === 'short-text'}
-      onChange={(event) => {
-        dispatch(updateAnswerData({ qIdx, answer: event.target.value }));
-      }}
-    />
+    <>
+      {sort === 'short-text' ? (
+        <AnswerInput
+          readOnly={pathname === '/result'}
+          result={pathname === '/result'}
+          type="text"
+          placeholder="내 답변"
+          value={question.answer}
+          onChange={(event) => {
+            console.log('이벤트', event.target.value, 'qIdx', qIdx);
+            dispatch(updateAnswerData({ qIdx, answer: event.target.value }));
+          }}
+        />
+      ) : (
+        <AnswerTextArea
+          readOnly={pathname === '/result'}
+          result={pathname === '/result'}
+          value={question.answer}
+          placeholder="내 답변"
+          onChange={(event) => {
+            dispatch(updateAnswerData({ qIdx, answer: event.target.value }));
+          }}
+          lines={String(question.answer).split('\n').length}
+        />
+      )}
+    </>
   );
 };
 export default PvText;

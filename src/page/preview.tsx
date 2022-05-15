@@ -1,12 +1,11 @@
 import styled from 'styled-components';
 import PvTitle from '../components/Preview/pvTitle';
-import { useEffect, useState } from 'react';
-import { surveyState } from '../model/typeDefs';
+import { useEffect } from 'react';
 import PvQuestion from '../components/Preview/pvQuestion';
 import { Button, ButtonWrap, DeleteAnswer } from '../style/buttonSt';
 import { useSelector } from 'react-redux';
 import { RootState } from '../state/store';
-import survey, { changeSubmitState, updateAllData } from '../state/survey';
+import { changeSubmitState, updateAllData } from '../state/survey';
 import { useAppDispatch } from '../state/hook';
 
 const Container = styled.div`
@@ -34,11 +33,24 @@ const Preview = () => {
 
   const changePageToResult = () => {
     dispatch(changeSubmitState({ submitState: true }));
+    let necessaryQuestions = surveyData.questions.filter((question) => {
+      return question.necessary;
+    });
+    let emptyAnswers = necessaryQuestions.filter((el) => {
+      return el.answer === '';
+    });
+    console.log('헤이', emptyAnswers.length);
+    if (emptyAnswers.length !== 0) {
+      return;
+    } else {
+      localStorage.setItem('result', JSON.stringify(surveyData));
+      window.open('/result', '_blank');
+    }
   };
 
   return (
     <Container>
-      <PvTitle necessary={Boolean(necessary.length)} header={surveyData.header}></PvTitle>
+      <PvTitle necessary={Boolean(necessary.length)} header={surveyData.header} />
       {surveyData.questions.map((question, idx) => {
         return <PvQuestion isSubmit={isSubmit} question={question} qIdx={idx} />;
       })}
