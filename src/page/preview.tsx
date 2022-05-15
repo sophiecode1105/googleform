@@ -4,6 +4,10 @@ import { useEffect, useState } from 'react';
 import { surveyState } from '../model/typeDefs';
 import PvQuestion from '../components/Preview/pvQuestion';
 import { Button, ButtonWrap, DeleteAnswer } from '../style/buttonSt';
+import { useAppDispatch } from '../state/hook';
+import { createAnswerFormData } from '../state/result';
+import { useSelector } from 'react-redux';
+import { RootState } from '../state/store';
 
 const Container = styled.div`
   max-width: 800px;
@@ -12,7 +16,9 @@ const Container = styled.div`
 `;
 
 const Preview = () => {
-  const [surveyData, setSurveyData] = useState<surveyState | undefined>(undefined);
+  const dispatch = useAppDispatch();
+  const initialData = useSelector((state: RootState) => state.surveyData);
+  const [surveyData, setSurveyData] = useState<surveyState>(initialData);
 
   let necessary = surveyData?.questions.filter((question) => {
     return question.necessary;
@@ -24,10 +30,14 @@ const Preview = () => {
     setSurveyData(data);
   }, []);
 
+  useEffect(() => {
+    dispatch(createAnswerFormData({ form: surveyData }));
+  }, [surveyData]);
+
   return (
     <Container>
-      <PvTitle necessary={Boolean(necessary?.length)} header={surveyData?.header}></PvTitle>
-      {surveyData?.questions.map((question, idx) => {
+      <PvTitle necessary={Boolean(necessary.length)} header={surveyData.header}></PvTitle>
+      {surveyData.questions.map((question, idx) => {
         return <PvQuestion question={question} qIdx={idx} />;
       })}
       <ButtonWrap>

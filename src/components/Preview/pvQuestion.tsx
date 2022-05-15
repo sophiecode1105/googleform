@@ -4,7 +4,6 @@ import { AnswerInput, Container, PvQuesWrap, QuesTitle, SelectListWrap } from '.
 import PvSelect from './pvSelect';
 import PvDropDown from './pvDropDown';
 import lodash from 'lodash';
-import { useEffect } from 'react';
 
 const PvQuestion = ({ question, qIdx }: { question: question; qIdx: number }) => {
   let title = question.title;
@@ -21,7 +20,6 @@ const PvQuestion = ({ question, qIdx }: { question: question; qIdx: number }) =>
         <QuesTitle>
           {title} {necessary ? <span>*</span> : null}
         </QuesTitle>
-
         <SelectListWrap>
           {sort.includes('text') ? (
             <AnswerInput type="text" placeholder="내 답변" short={sort === 'short-text'} />

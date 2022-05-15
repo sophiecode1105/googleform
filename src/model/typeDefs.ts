@@ -7,6 +7,19 @@ export interface surveyState {
   value: string;
 }
 
+export interface answerState {
+  header: {
+    title: string;
+    explain: string;
+  };
+  results: answer[];
+}
+export interface answer {
+  title: string;
+  answer: string;
+  necessary: boolean;
+  optionType: string;
+}
 export interface visibleProp {
   visible: boolean;
 }

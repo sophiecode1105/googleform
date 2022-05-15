@@ -1,5 +1,4 @@
 import { option } from '../../model/typeDefs';
-import { useForm } from 'react-hook-form';
 import { CheckInput, RadioInput, SelectLabel, SelectWrap } from '../../style/questionSt';
 
 const PvSelect = ({

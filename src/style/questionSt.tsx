@@ -68,6 +68,7 @@ export const ListWrap = styled.div<visibleProp>`
   display: ${(props) => (props.visible ? 'flex' : 'none')};
   flex-direction: column;
   box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%);
+  border-radius: 5px;
   position: absolute;
   width: 100%;
   right: 0;
@@ -212,6 +213,7 @@ export const CheckInput = styled.input`
   border: 1px solid rgb(77, 80, 84);
   border-radius: 0.15rem;
   margin: 10px 0px;
+  cursor: pointer;
   &:checked {
     border-color: transparent;
     background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/White_check.svg/1200px-White_check.svg.png');
@@ -227,7 +229,7 @@ export const RadioInput = styled.input`
   width: 18px;
   height: 18px;
   margin: 10px 0px;
-  border: 2px solid black;
+  cursor: pointer;
 `;
 
 export const SelectWrap = styled.div`
