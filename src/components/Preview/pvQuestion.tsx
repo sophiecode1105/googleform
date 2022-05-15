@@ -1,11 +1,11 @@
 import { question } from '../../model/typeDefs';
-import { useForm } from 'react-hook-form';
-import { AnswerInput, Container, PvQuesWrap, QuesTitle, SelectListWrap } from '../../style/questionSt';
+import { Container, ErrorMessage, Exclamation, PvQuesWrap, QuesTitle, SelectListWrap } from '../../style/questionSt';
 import PvSelect from './pvSelect';
-import PvDropDown from './pvDropDown';
+import PvDropDown from './InputType/pvDropDown';
 import lodash from 'lodash';
+import PvText from './InputType/pvText';
 
-const PvQuestion = ({ question, qIdx }: { question: question; qIdx: number }) => {
+const PvQuestion = ({ isSubmit, question, qIdx }: { isSubmit: boolean; question: question; qIdx: number }) => {
   let title = question.title;
   let necessary = question.necessary;
   let questions = question.optionList;
@@ -13,6 +13,10 @@ const PvQuestion = ({ question, qIdx }: { question: question; qIdx: number }) =>
 
   let dropList = lodash.cloneDeep(questions);
   dropList.unshift({ content: '선택', order: 0 });
+
+  console.log('wpcnf', isSubmit);
+  console.log('필수', necessary);
+  console.log(question.answer);
 
   return (
     <Container>
@@ -22,16 +26,24 @@ const PvQuestion = ({ question, qIdx }: { question: question; qIdx: number }) =>
         </QuesTitle>
         <SelectListWrap>
           {sort.includes('text') ? (
-            <AnswerInput type="text" placeholder="내 답변" short={sort === 'short-text'} />
+            <PvText question={question} sort={sort} qIdx={qIdx} />
           ) : sort.includes('drop') ? (
-            <PvDropDown options={dropList} />
+            <PvDropDown qIdx={qIdx} options={dropList} answer={question.answer} />
           ) : (
             questions.map((option, idx) => {
               console.log('option', option);
-              return <PvSelect qIdx={qIdx} title={title} necessary={necessary} sort={sort} option={option} />;
+              return (
+                <PvSelect qIdx={qIdx} title={title} sort={sort} option={option} key={idx} answer={question.answer} />
+              );
             })
           )}
         </SelectListWrap>
+        {isSubmit && necessary && !question.answer ? (
+          <ErrorMessage>
+            <Exclamation className="fas fa-exclamation-circle" />
+            필수 질문입니다.
+          </ErrorMessage>
+        ) : null}
       </PvQuesWrap>
     </Container>
   );

@@ -236,3 +236,13 @@ export const SelectWrap = styled.div`
   display: flex;
   align-items: center;
 `;
+
+export const ErrorMessage = styled.div`
+  font-size: 14px;
+  color: rgb(205, 27, 29);
+  margin: 20px;
+`;
+
+export const Exclamation = styled.i`
+  margin-right: 10px;
+`;

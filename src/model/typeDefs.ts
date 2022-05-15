@@ -4,7 +4,7 @@ export interface surveyState {
     explain: string;
   };
   questions: question[];
-  value: string;
+  submit: boolean;
 }
 
 export interface answerState {
@@ -31,6 +31,7 @@ export interface option {
 
 export interface question {
   title: string;
+  answer: string | string[];
   necessary: boolean;
   optionType: type;
   optionList: option[];

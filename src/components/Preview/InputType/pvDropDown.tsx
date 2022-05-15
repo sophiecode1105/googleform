@@ -1,13 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
-import { option } from '../../model/typeDefs';
-import { Icon, IconWrap, ListWrap, Selection, Title, Wrap } from '../../style/questionSt';
-import down from '../../assets/down.png';
+import { option } from '../../../model/typeDefs';
+import { Icon, IconWrap, ListWrap, Selection, Title, Wrap } from '../../../style/questionSt';
+import down from '../../../assets/down.png';
+import { useAppDispatch } from '../../../state/hook';
+import { updateAnswerData } from '../../../state/survey';
 
-const PvDropDown = ({ options }: { options: option[] }) => {
+const PvDropDown = ({ options, qIdx, answer }: { options: option[]; qIdx: number; answer: string | string[] }) => {
+  const dispatch = useAppDispatch();
   const side = useRef<HTMLDivElement>(null);
 
   const [visible, setVisible] = useState<boolean>(false);
-  const [answer, setAnswer] = useState<string>('');
 
   const handleClickOutside = (event: CustomEvent<MouseEvent>) => {
     if (!side?.current?.contains(event.target as Node)) {
@@ -42,9 +44,9 @@ const PvDropDown = ({ options }: { options: option[] }) => {
                   key={i}
                   onClick={(event) => {
                     if (option.order === 0) {
-                      setAnswer('');
+                      dispatch(updateAnswerData({ qIdx, answer: '' }));
                     } else {
-                      setAnswer(option.content);
+                      dispatch(updateAnswerData({ qIdx, answer: option.content }));
                     }
                   }}
                 >
