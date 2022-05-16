@@ -63,6 +63,8 @@ const Option = ({
       })
     );
   };
+  console.log('defaultText', defaultText);
+  console.log('컨텐츠좀', item.content);
 
   return (
     <OptionWrap>
@@ -80,7 +82,7 @@ const Option = ({
         onBlur={() => {
           setWriting(false);
           if (!text) {
-            setText(defaultText);
+            setText('옵션 ' + item.order);
           } else if (!isUnique) {
             setText('옵션 ' + String(item.order));
           }

@@ -4,6 +4,9 @@ export const Container = styled.div`
   position: fixed;
   bottom: 5%;
   right: 5%;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const Button = styled.button`
