@@ -21,6 +21,10 @@ export const QuesWrap = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 export const QuesTitle = styled.div`
@@ -56,12 +60,16 @@ export const Selection = styled.div<resultProp>`
   justify-content: space-between;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 5px;
-  width: 30%;
+  width: 40%;
   margin-right: 20px;
   & ::selection {
     -webkit-tap-highlight-color: transparent;
   }
   cursor: ${(props) => (props.result ? null : 'pointer')};
+  @media (max-width: 768px) {
+    margin-left: 20px;
+    width: 50%;
+  }
 `;
 
 export const ListWrap = styled.div<visibleProp>`
@@ -131,7 +139,7 @@ export const OptionIcon = styled.div`
   margin-right: 10px;
   color: rgb(175, 175, 175);
 
-  &:last-child {
+  &:nth-child(3) {
     color: black;
     cursor: pointer;
   }
@@ -256,4 +264,5 @@ export const ErrorMessage = styled.div`
 
 export const Exclamation = styled.i`
   margin-right: 10px;
+  color: rgb(205, 27, 29);
 `;

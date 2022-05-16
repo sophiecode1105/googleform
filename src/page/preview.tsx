@@ -5,7 +5,7 @@ import PvQuestion from '../components/Preview/pvQuestion';
 import { Button, ButtonWrap, DeleteAnswer } from '../style/buttonSt';
 import { useSelector } from 'react-redux';
 import { RootState } from '../state/store';
-import { changeSubmitState, updateAllData } from '../state/survey';
+import { changeSubmitState, resetAllAnswerData, updateAllData } from '../state/survey';
 import { useAppDispatch } from '../state/hook';
 
 const Container = styled.div`
@@ -18,6 +18,7 @@ const Preview = () => {
   const dispatch = useAppDispatch();
   const surveyData = useSelector((state: RootState) => state.surveyData);
 
+  console.log('프리뷰돌아야뎀');
   const isSubmit = surveyData.submit;
 
   const necessary = surveyData.questions.filter((question) => {
@@ -48,6 +49,11 @@ const Preview = () => {
     }
   };
 
+  const clearForm = () => {
+    console.log('클리어폼');
+    dispatch(resetAllAnswerData());
+  };
+
   return (
     <Container>
       <PvTitle necessary={Boolean(necessary.length)} header={surveyData.header} />
@@ -56,7 +62,7 @@ const Preview = () => {
       })}
       <ButtonWrap>
         <Button onClick={changePageToResult}>제출</Button>
-        <DeleteAnswer>양식 지우기</DeleteAnswer>
+        <DeleteAnswer onClick={clearForm}>양식 지우기</DeleteAnswer>
       </ButtonWrap>
     </Container>
   );
