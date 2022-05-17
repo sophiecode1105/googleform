@@ -1,6 +1,4 @@
-import { uniq } from 'lodash';
 import { useEffect, useState } from 'react';
-import { option, question } from '../../../../model/typeDefs';
 import { useAppDispatch } from '../../../../state/hook';
 import { changeOptionTitle, removeItemFromOptionList } from '../../../../state/survey';
 import { Exclamation, OptionIcon, OptionInput, OptionNum, OptionWrap } from '../../../../style/question';

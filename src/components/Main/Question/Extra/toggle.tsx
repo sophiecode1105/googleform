@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useAppDispatch } from '../../../../state/hook';
 import { changeNeccessaryState } from '../../../../state/survey';
 import { ToggleCircle, ToggleContainer, ToggleInside } from '../../../../style/extra';
