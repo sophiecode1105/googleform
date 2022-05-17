@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { option } from '../../../model/typeDefs';
-import { Icon, IconWrap, ListWrap, Selection, Title, Wrap } from '../../../style/questionSt';
+import { Icon, IconWrap, ListWrap, Selection, Title, Wrap } from '../../../style/question';
 import down from '../../../assets/down.png';
 import { useAppDispatch } from '../../../state/hook';
 import { updateAnswerData } from '../../../state/survey';
@@ -29,7 +29,7 @@ const PvDropDown = ({ options, qIdx, answer }: { options: option[]; qIdx: number
 
   return (
     <Selection
-      result={pathname === '/result'}
+      result={pathname === '/result' || undefined}
       ref={side}
       onClick={(e) => {
         if (pathname === '/result') {

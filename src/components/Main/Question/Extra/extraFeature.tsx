@@ -1,8 +1,8 @@
 import { useAppDispatch } from '../../../../state/hook';
 import { addQuestionList, removeQuestionFromQuestions } from '../../../../state/survey';
-import { ExtraContainer, ExtraIcon, ExtraIconWrap, Line, Text } from '../../../../style/extraSt';
+import { ExtraContainer, ExtraIcon, ExtraIconWrap, Line, Text } from '../../../../style/extra';
 import lodash from 'lodash';
-import Toggle from './toggle';
+import Toggle from './Toggle';
 import { question } from '../../../../model/typeDefs';
 
 const ExtraFeature = ({ question, qIdx }: { question: question; qIdx: number }) => {

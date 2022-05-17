@@ -63,7 +63,6 @@ export const surveyDataSlice = createSlice({
     },
     addQuestionList: (state, action: PayloadAction<{ newQuestion: question }>) => {
       const { newQuestion } = action.payload;
-      console.log('잘들어가는지', newQuestion);
       let newList = [...state.questions, newQuestion];
       state.questions = newList;
     },

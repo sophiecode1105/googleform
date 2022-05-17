@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { option, question } from '../../../../model/typeDefs';
 import { useAppDispatch } from '../../../../state/hook';
 import { changeOptionTitle, removeItemFromOptionList } from '../../../../state/survey';
-import { Exclamation, OptionIcon, OptionInput, OptionNum, OptionWrap } from '../../../../style/questionSt';
+import { Exclamation, OptionIcon, OptionInput, OptionNum, OptionWrap } from '../../../../style/question';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../state/store';
 
@@ -42,14 +42,11 @@ const Option = ({
     }
   }, [item.order]);
 
-  // useEffect(() => {}, [isUnique]);
-
   useEffect(() => {
     let unique =
       surveyData.questions[qIdx].optionList.filter((el, i) => el.content.trim() === text.trim() && i !== idx).length ===
       0;
     if (unique) {
-      console.log('unique SD->', surveyData);
       dispatch(changeOptionTitle({ qIdx, idx, content: text }));
     }
     setIsUnique(unique);
@@ -63,8 +60,6 @@ const Option = ({
       })
     );
   };
-  console.log('defaultText', defaultText);
-  console.log('컨텐츠좀', item.content);
 
   return (
     <OptionWrap>

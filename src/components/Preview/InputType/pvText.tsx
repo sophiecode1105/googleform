@@ -2,7 +2,7 @@ import { useLocation } from 'react-router-dom';
 import { question } from '../../../model/typeDefs';
 import { useAppDispatch } from '../../../state/hook';
 import { updateAnswerData } from '../../../state/survey';
-import { AnswerInput, AnswerTextArea, ErrorMessage, Exclamation } from '../../../style/questionSt';
+import { AnswerInput, AnswerTextArea, ErrorMessage, Exclamation } from '../../../style/question';
 
 const PvText = ({ question, sort, qIdx }: { question: question; sort: string; qIdx: number }) => {
   const dispatch = useAppDispatch();
@@ -15,10 +15,9 @@ const PvText = ({ question, sort, qIdx }: { question: question; sort: string; qI
           readOnly={pathname === '/result'}
           result={pathname === '/result'}
           type="text"
-          placeholder="내 답변"
+          placeholder={pathname === '/result' ? '' : '내 답변'}
           value={question.answer}
           onChange={(event) => {
-            console.log('이벤트', event.target.value, 'qIdx', qIdx);
             dispatch(updateAnswerData({ qIdx, answer: event.target.value }));
           }}
         />
@@ -27,7 +26,7 @@ const PvText = ({ question, sort, qIdx }: { question: question; sort: string; qI
           readOnly={pathname === '/result'}
           result={pathname === '/result'}
           value={question.answer}
-          placeholder="내 답변"
+          placeholder={pathname === '/result' ? '' : '내 답변'}
           onChange={(event) => {
             dispatch(updateAnswerData({ qIdx, answer: event.target.value }));
           }}

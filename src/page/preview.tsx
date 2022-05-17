@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import PvTitle from '../components/Preview/pvTitle';
+import PvTitle from '../components/Preview/PvTitle';
 import { useEffect } from 'react';
-import PvQuestion from '../components/Preview/pvQuestion';
-import { Button, ButtonWrap, DeleteAnswer } from '../style/buttonSt';
+import PvQuestion from '../components/Preview/PvQuestion';
+import { Button, ButtonWrap, DeleteAnswer } from '../style/button';
 import { useSelector } from 'react-redux';
 import { RootState } from '../state/store';
 import { changeSubmitState, resetAllAnswerData, updateAllData } from '../state/survey';
@@ -18,17 +18,14 @@ const Preview = () => {
   const dispatch = useAppDispatch();
   const surveyData = useSelector((state: RootState) => state.surveyData);
 
-  console.log('프리뷰돌아야뎀');
   const isSubmit = surveyData.submit;
 
   const necessary = surveyData.questions.filter((question) => {
     return question.necessary;
   });
-  console.log('서베이데이타', surveyData);
 
   useEffect(() => {
     let data = JSON.parse(localStorage.getItem('preview') || '');
-    console.log('데이터', data);
     dispatch(updateAllData({ surveyData: data }));
   }, []);
 
@@ -40,7 +37,6 @@ const Preview = () => {
     let emptyAnswers = necessaryQuestions.filter((el) => {
       return el.answer === '';
     });
-    console.log('헤이', emptyAnswers.length);
     if (emptyAnswers.length !== 0) {
       return;
     } else {
@@ -50,7 +46,6 @@ const Preview = () => {
   };
 
   const clearForm = () => {
-    console.log('클리어폼');
     dispatch(resetAllAnswerData());
   };
 
@@ -58,7 +53,7 @@ const Preview = () => {
     <Container>
       <PvTitle necessary={Boolean(necessary.length)} header={surveyData.header} />
       {surveyData.questions.map((question, idx) => {
-        return <PvQuestion isSubmit={isSubmit} question={question} qIdx={idx} />;
+        return <PvQuestion isSubmit={isSubmit} question={question} qIdx={idx} key={`pv-q-${idx}`} />;
       })}
       <ButtonWrap>
         <Button onClick={changePageToResult}>제출</Button>

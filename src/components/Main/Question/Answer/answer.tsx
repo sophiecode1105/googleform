@@ -1,5 +1,5 @@
 import { useAppDispatch } from '../../../../state/hook';
-import Option from './option';
+import Option from './Option';
 import { updateOptionList } from '../../../../state/survey';
 import { option } from '../../../../model/typeDefs';
 import {
@@ -12,7 +12,7 @@ import {
   OptionNum,
   OptionWrap,
   TextDiv,
-} from '../../../../style/questionSt';
+} from '../../../../style/question';
 import { useEffect } from 'react';
 
 const Answer = ({ optionType, optionList, qIdx }: { optionType: string; optionList: option[]; qIdx: number }) => {
@@ -83,6 +83,7 @@ const Answer = ({ optionType, optionList, qIdx }: { optionType: string; optionLi
 
             return (
               <Option
+                key={`option-${idx}`}
                 optionType={optionType}
                 iconClassName={iconClassName}
                 item={item}
@@ -99,7 +100,7 @@ const Answer = ({ optionType, optionList, qIdx }: { optionType: string; optionLi
               <OptionIcon className={iconClassName} />
             )}
             <AddWrap>
-              <AddOptionInput type="text" value="옵션 추가" onClick={addList} />
+              <AddOptionInput readOnly={true} type="text" value="옵션 추가" onClick={addList} />
               {optionList[optionList.length - 1].order === -1 ? null : (
                 <>
                   <TextDiv>또는</TextDiv>

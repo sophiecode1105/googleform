@@ -3,7 +3,7 @@ import document_women from '../../assets/document_women.png';
 import survey_men from '../../assets/survey_men.png';
 import survey_women from '../../assets/survey_women.png';
 import short from '../../assets/short.png';
-import { AddImg, Container, IllustImg, IllustImgWrap, PreviewImg } from '../../style/navSt';
+import { AddImg, Container, IllustImg, IllustImgWrap, PreviewImg } from '../../style/nav';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../state/store';
 import { useLocation } from 'react-router-dom';
@@ -47,8 +47,8 @@ const NavBar = () => {
   return (
     <Container>
       <IllustImgWrap>
-        {srcList.map((img) => {
-          return <IllustImg src={img} />;
+        {srcList.map((img, idx) => {
+          return <IllustImg src={img} key={`img-${idx}`} />;
         })}
         <AddImg onClick={addQuestion} className="fa-solid fa-circle-plus" />
         {pathname === '/' ? <PreviewImg className="fa-solid fa-eye" onClick={() => pageMoveToPreview()} /> : null}
