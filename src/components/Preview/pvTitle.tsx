@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { title } from '../../model/typeDefs';
-import { Alert, Container, Form, InputWrap, SubTitleContent, TitleContent, TitleWrap } from '../../style/titleSt';
+import { Alert, Container, Form, InputWrap, SubTitleContent, TitleContent, TitleWrap } from '../../style/title';
 
 const PvTitle = ({ header, necessary }: { header: title; necessary: boolean }) => {
   const { pathname } = useLocation();

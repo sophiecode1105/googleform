@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { option } from '../../model/typeDefs';
 import { useAppDispatch } from '../../state/hook';
 import { updateAnswerData } from '../../state/survey';
-import { CheckInput, RadioInput, SelectLabel, SelectWrap } from '../../style/questionSt';
+import { CheckInput, RadioInput, SelectLabel, SelectWrap } from '../../style/question';
 
 const PvSelect = ({
   answer,
@@ -21,9 +21,8 @@ const PvSelect = ({
   idx: number;
 }) => {
   const dispatch = useAppDispatch();
-  const { pathname } = useLocation();
+  const { pathname } = useLocation(); //컴포넌트 재활용을 위하여 RESULT페이지일때 와 아닐때를 구분하여준다.
 
-  console.log('정답을알려줘~', answer);
   const checkRef = useRef() as React.MutableRefObject<HTMLInputElement>;
   const radioRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
@@ -54,7 +53,6 @@ const PvSelect = ({
   }, [answer]);
 
   const updateCheckBoxAnswer = () => {
-    console.log('찍히냐');
     if (Array.isArray(answer)) {
       if (answer.includes(option.content)) {
         let deletedItemList = answer.filter((item) => {
@@ -70,7 +68,6 @@ const PvSelect = ({
     }
   };
 
-  console.log('order', typeof option.order);
   return (
     <SelectWrap>
       {sort === 'checkbox' ? (

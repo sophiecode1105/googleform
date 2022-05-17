@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import NavBar from './components/Nav/NavBar';
 import GlobalStyles from './GlobalStyles';
-import Main from './page/main';
-import Preview from './page/preview';
-import Result from './page/result';
+import Main from './page/Main';
+import Preview from './page/Preview';
+import Result from './page/Result';
 
 const Routers = () => {
   return (

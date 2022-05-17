@@ -6,7 +6,7 @@ import drop from '../../../assets/dropbox.png';
 import down from '../../../assets/down.png';
 import { useAppDispatch } from '../../../state/hook';
 import { useState, useRef, useEffect } from 'react';
-import { Icon, IconWrap, ListWrap, Selection, Title, Wrap } from '../../../style/questionSt';
+import { Icon, IconWrap, ListWrap, Selection, Title, Wrap } from '../../../style/question';
 import { changeOptionType } from '../../../state/survey';
 import { type } from '../../../model/typeDefs';
 
@@ -54,7 +54,6 @@ const QuestionType = ({ questionType, qIdx }: { questionType: type; qIdx: number
       <ListWrap visible={visible}>
         {visible
           ? lists.map((list, i) => {
-              console.log(list);
               return (
                 <Wrap
                   key={i}

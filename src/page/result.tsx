@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { surveyState } from '../model/typeDefs';
 import styled from 'styled-components';
-import PvTitle from '../components/Preview/pvTitle';
-import PvQuestion from '../components/Preview/pvQuestion';
+import PvTitle from '../components/Preview/PvTitle';
+import PvQuestion from '../components/Preview/PvQuestion';
 
 const Container = styled.div`
   max-width: 800px;
@@ -19,13 +19,11 @@ const Result = () => {
 
   const isSubmit = surveyAnswer.submit;
 
-  console.log('서베이데이타', surveyAnswer);
-
   return (
     <Container>
       <PvTitle necessary={Boolean(necessary.length)} header={surveyAnswer.header} />
       {surveyAnswer.questions.map((question, idx) => {
-        return <PvQuestion isSubmit={isSubmit} question={question} qIdx={idx} />;
+        return <PvQuestion key={`rs-q-${idx}`} isSubmit={isSubmit} question={question} qIdx={idx} />;
       })}
     </Container>
   );

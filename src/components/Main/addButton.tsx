@@ -1,6 +1,6 @@
 import { useAppDispatch } from '../../state/hook';
 import { addQuestionList } from '../../state/survey';
-import { Button, Container } from '../../style/buttonSt';
+import { Button, Container } from '../../style/button';
 import short from '../../assets/short.png';
 
 const AddButton = () => {

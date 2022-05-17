@@ -1,9 +1,9 @@
 import { question } from '../../model/typeDefs';
-import { Container, ErrorMessage, Exclamation, PvQuesWrap, QuesTitle, SelectListWrap } from '../../style/questionSt';
-import PvSelect from './pvSelect';
-import PvDropDown from './InputType/pvDropDown';
+import { Container, ErrorMessage, Exclamation, PvQuesWrap, QuesTitle, SelectListWrap } from '../../style/question';
+import PvSelect from './PvSelect';
+import PvDropDown from './InputType/PvDropDown';
 import lodash from 'lodash';
-import PvText from './InputType/pvText';
+import PvText from './InputType/PvText';
 
 const PvQuestion = ({ isSubmit, question, qIdx }: { isSubmit: boolean; question: question; qIdx: number }) => {
   let title = question.title;
@@ -13,8 +13,6 @@ const PvQuestion = ({ isSubmit, question, qIdx }: { isSubmit: boolean; question:
 
   let dropList = lodash.cloneDeep(questions);
   dropList.unshift({ content: '선택', order: 0 });
-
-  console.log(question.answer);
 
   return (
     <Container>
@@ -29,14 +27,13 @@ const PvQuestion = ({ isSubmit, question, qIdx }: { isSubmit: boolean; question:
             <PvDropDown qIdx={qIdx} options={dropList} answer={question.answer} />
           ) : (
             questions.map((option, idx) => {
-              console.log('option', option);
               return (
                 <PvSelect
                   qIdx={qIdx}
                   title={title}
                   sort={sort}
                   option={option}
-                  key={idx}
+                  key={`pv-option-${idx}`}
                   answer={question.answer}
                   idx={idx}
                 />

@@ -1,9 +1,9 @@
-import Question from '../components/Main/Question/question';
-import Title from '../components/Main/Title/title';
+import Question from '../components/Main/Question/Question';
+import Title from '../components/Main/Title/Title';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { RootState } from '../state/store';
-import AddButton from '../components/Main/addButton';
+import AddButton from '../components/Main/AddButton';
 
 const Container = styled.div`
   max-width: 800px;
