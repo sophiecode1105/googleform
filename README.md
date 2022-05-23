@@ -1,5 +1,3 @@
-# classum-googleform
-
 <h2>Frontend 과제</h2>
 
 ## 구현 설명
